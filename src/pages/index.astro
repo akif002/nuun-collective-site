@@ -1,3 +1,7 @@
+---
+import "../styles/global.css";
+---
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -15,22 +19,23 @@
       id="charitystack-embed"
       data-id="org_VWighWRyUt"
       src="https://prod-donation-elements-b-donationelementsjsfilesb-1m4f4dl6p6b21.s3.us-east-2.amazonaws.com/bundle.js"
+      is:inline
     ></script>
     <!-- End of CharityStack Embed-->
-    <link rel="stylesheet" href="./styles.css" />
-    <script defer src="./script.js"></script>
+    <script defer src="/script.js" is:inline></script>
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
 
     <header class="site-header" data-header>
       <a class="brand-logo small" href="#top" aria-label="Nuun Collective home">
-        <img src="./assets/logos/nuun-wordmark-orange.png" alt="Nuun" />
+        <img src="/assets/logos/nuun-wordmark-orange.png" alt="Nuun" />
       </a>
       <nav class="desktop-nav" aria-label="Primary navigation">
         <a href="#about">About</a>
         <a href="#events">Events</a>
         <a href="#writing">Writing</a>
+        <a href="#media">Media</a>
         <a href="#support">Donate</a>
       </nav>
       <button class="button button-donate" type="button" data-donate>Donate</button>
@@ -58,7 +63,7 @@
 
           <div class="hero-logo reveal" aria-hidden="true">
             <div class="logo-panel">
-              <img src="./assets/logos/nuun-wordmark-orange.png" alt="" />
+              <img src="/assets/logos/nuun-wordmark-orange.png" alt="" />
             </div>
           </div>
         </div>
@@ -157,7 +162,7 @@
         <div class="media-feature reveal">
           <figure>
             <img
-              src="./assets/media/nuun-event.jpg"
+              src="/assets/media/nuun-event.jpg"
               alt="Nuun speaker holding a microphone at a community gathering"
             />
           </figure>
@@ -169,65 +174,46 @@
         </div>
       </section>
 
-      <section class="section writing-media" id="writing" aria-labelledby="writing-title">
-        <div class="section-label reveal">04 / Writing + Media</div>
+      <section class="section writing-section" id="writing" aria-labelledby="writing-title">
+        <div class="section-label reveal">04 / Writing</div>
         <div class="section-body reveal">
           <h2 id="writing-title">Writing that leaves the room.</h2>
           <p>
-            Nuun's public record lives across transcripts, videos, essays, and conversations. This
-            section should feel like a desk of open source material, not a list of links.
+            Essays, transcripts, and reflections are where the room becomes public record.
+            Start with the archive, then follow the conversations as they publish.
           </p>
-          <div class="media-wall">
+          <div class="writing-wall">
             <a
               class="feature-card"
-              href="https://www.nuuncollective.com/p/nuun-x-dr-yasir-qadhi-x-sheikh-mahdi"
+              href="https://www.nuuncollective.com/"
               target="_blank"
               rel="noreferrer"
             >
               <figure>
                 <img
-                  src="./assets/screenshots/yasir-mahdi.png"
-                  alt="Screenshot of the Nuun x Dr. Yasir Qadhi x Sheikh Mahdi article"
+                  src="/assets/screenshots/substack-home.png"
+                  alt="Screenshot of the Nuun Substack archive"
                 />
               </figure>
               <div class="feature-copy">
-                <small>Featured Transcript + Video</small>
-                <strong>Nuun x Dr. Yasir Qadhi x Sheikh Mahdi</strong>
-                <span>Open the conversation</span>
+                <small>Writing Archive</small>
+                <strong>Nuun Newsletter</strong>
+                <span>Read the archive</span>
               </div>
             </a>
-            <div class="media-stack">
-              <a href="https://www.youtube.com/channel/UCuCJGcOulNp7St2E5THLN4Q" target="_blank" rel="noreferrer">
-                <img src="./assets/screenshots/youtube.png" alt="Screenshot of the Nuun YouTube channel" />
-                <div>
-                  <small>Video</small>
-                  <strong>YouTube</strong>
-                </div>
-              </a>
-              <a href="https://open.spotify.com/show/7iV1qQqXSdfRFLcmznOgUM" target="_blank" rel="noreferrer">
-                <img src="./assets/screenshots/spotify.png" alt="Screenshot of the Nuun Spotify page" />
-                <div>
-                  <small>Audio</small>
-                  <strong>Spotify</strong>
-                </div>
-              </a>
-              <a class="brand-tile" href="https://www.nuuncollective.com/" target="_blank" rel="noreferrer">
-                <img src="./assets/logos/nuun-logo-alt.png" alt="" />
-                <div>
-                  <small>Essays + Archive</small>
-                  <strong>Substack</strong>
-                </div>
-              </a>
+            <div class="writing-stack">
               <a
-                class="brand-tile instagram-tile"
-                href="https://www.instagram.com/nuun.collective/?hl=en"
+                href="https://www.nuuncollective.com/p/nuun-x-dr-yasir-qadhi-x-sheikh-mahdi"
                 target="_blank"
                 rel="noreferrer"
               >
-                <img src="./assets/logos/nuun-logo-alt.png" alt="" />
+                <img
+                  src="/assets/screenshots/yasir-mahdi.png"
+                  alt="Screenshot of the Nuun x Dr. Yasir Qadhi x Sheikh Mahdi article"
+                />
                 <div>
-                  <small>Live Updates</small>
-                  <strong>Instagram</strong>
+                  <small>Featured Transcript + Video</small>
+                  <strong>Nuun x Dr. Yasir Qadhi x Sheikh Mahdi</strong>
                 </div>
               </a>
             </div>
@@ -235,27 +221,46 @@
         </div>
       </section>
 
-      <section class="section dallas-section" id="dallas" aria-labelledby="dallas-title">
-        <div class="section-label reveal">10 / Dallas</div>
-        <div class="dallas-layout reveal">
-          <div>
-            <h2 id="dallas-title">Rooted in Dallas. Built for the Ummah.</h2>
-            <p>
-              Nuun began as a local gathering of Muslims in Dallas asking what it would take to
-              build a serious culture of thought, writing, and action. The work starts here, but
-              the questions are larger than one city.
-            </p>
-          </div>
-          <div class="dallas-map" aria-hidden="true">
-            <span>DAL</span>
-            <small>32.7767 N / 96.7970 W</small>
+      <section class="section media-section" id="media" aria-labelledby="media-title">
+        <div class="section-label reveal">05 / Media</div>
+        <div class="section-body reveal">
+          <h2 id="media-title">Watch, listen, follow.</h2>
+          <p>
+            Nuun lives across video, audio, and social clips for people who want the conversation
+            before, during, and after the room.
+          </p>
+          <div class="channel-grid">
+            <a href="https://www.youtube.com/channel/UCuCJGcOulNp7St2E5THLN4Q" target="_blank" rel="noreferrer">
+              <img src="/assets/screenshots/youtube.png" alt="Screenshot of the Nuun YouTube channel" />
+              <div>
+                <small>Video</small>
+                <strong>YouTube</strong>
+                <span>Watch conversations</span>
+              </div>
+            </a>
+            <a href="https://www.instagram.com/nuun.collective/?hl=en" target="_blank" rel="noreferrer">
+              <img src="/assets/screenshots/instagram.png" alt="Screenshot of the Nuun Instagram profile" />
+              <div>
+                <small>Live Updates</small>
+                <strong>Instagram</strong>
+                <span>Follow the room</span>
+              </div>
+            </a>
+            <a href="https://open.spotify.com/show/7iV1qQqXSdfRFLcmznOgUM" target="_blank" rel="noreferrer">
+              <img src="/assets/screenshots/spotify.png" alt="Screenshot of the Nuun Spotify page" />
+              <div>
+                <small>Audio</small>
+                <strong>Spotify</strong>
+                <span>Listen to episodes</span>
+              </div>
+            </a>
           </div>
         </div>
       </section>
 
       <section class="support" id="support" aria-labelledby="support-title">
         <div class="support-copy reveal">
-          <p class="section-label">11 / Support</p>
+          <p class="section-label">06 / Support</p>
           <h2 id="support-title">Become a supporter.</h2>
           <p>
             Nuun is completely bootstrapped. Everything so far has been funded by selling
@@ -278,7 +283,7 @@
           <button class="button button-donate" type="button" data-donate>Donate to Nuun</button>
           <p class="secure-note">Secure donations powered by CharityStack.</p>
         </div>
-        <div class="embed-shell reveal" aria-label="Nuun donation form">
+        <div class="support-embed reveal" aria-label="Nuun donation form">
           <div class="embed-frame">
             <!-- CharityStack fundraising progress bar. Keep this exact div once on the page. -->
             <div data-entity="FUNDRAISING_BAR" data-source="CharityStack" id="7f98ee6f-262f-4263-ba45-ddbd899ed38c"></div>
@@ -291,7 +296,7 @@
 
     <footer class="site-footer">
       <a class="brand-logo small" href="#top" aria-label="Nuun Collective home">
-        <img src="./assets/logos/nuun-wordmark-orange.png" alt="Nuun" />
+        <img src="/assets/logos/nuun-wordmark-orange.png" alt="Nuun" />
       </a>
       <nav aria-label="Footer navigation">
         <a href="https://www.instagram.com/nuun.collective/" target="_blank" rel="noreferrer">Instagram</a>
