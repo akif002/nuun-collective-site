@@ -1,14 +1,17 @@
 const FORM_ID = "ddabb69a-a264-4677-8bad-614bcc5e8f09";
 
 function showDonationForm() {
-  const form = document.getElementById(FORM_ID);
   const support = document.getElementById("support");
-  const target = form || support;
+  const header = document.querySelector("[data-header]");
 
-  if (!target) return;
+  if (!support) return;
 
   window.history.replaceState(null, "", "#support");
-  target.scrollIntoView({ behavior: "smooth", block: "center" });
+
+  const headerOffset = header?.offsetHeight || 0;
+  const top = support.getBoundingClientRect().top + window.scrollY - headerOffset - 20;
+
+  window.scrollTo({ top, behavior: "smooth" });
 }
 
 function setupDonationButtons() {

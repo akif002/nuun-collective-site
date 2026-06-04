@@ -252,7 +252,6 @@ button {
 .depth-canvas,
 .depth-vignette,
 .depth-copy,
-.depth-counter,
 .depth-fallback {
   position: absolute;
 }
@@ -311,32 +310,12 @@ button {
   font-size: clamp(1rem, 1.45vw, 1.2rem);
 }
 
-.depth-copy span,
-.depth-counter span {
+.depth-copy span {
   color: var(--nuun-orange);
   font-size: 0.74rem;
   font-weight: 800;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-}
-
-.depth-counter {
-  z-index: 3;
-  right: clamp(1.25rem, 5vw, 4rem);
-  bottom: clamp(1.25rem, 4vw, 3rem);
-  display: grid;
-  gap: 0.25rem;
-  justify-items: end;
-  opacity: clamp(0.2, calc(1 - (var(--depth-progress) * 1.2)), 0.82);
-}
-
-.depth-counter strong {
-  color: var(--nuun-cream);
-  font-family: var(--display);
-  font-size: clamp(4rem, 8vw, 8.5rem);
-  font-weight: 400;
-  letter-spacing: 0.02em;
-  line-height: 0.8;
 }
 
 .depth-fallback {
@@ -1201,15 +1180,6 @@ p {
 
   .depth-copy h1 {
     font-size: clamp(3.4rem, 17vw, 5.7rem);
-  }
-
-  .depth-counter {
-    right: 1rem;
-    bottom: 1rem;
-  }
-
-  .depth-counter strong {
-    font-size: clamp(3.2rem, 18vw, 5.5rem);
   }
 
   .depth-fallback {

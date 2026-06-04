@@ -45,7 +45,6 @@ export default function initDepthGallery() {
 
     const canvas = section.querySelector("[data-depth-canvas]");
     const fallback = section.querySelector("[data-depth-fallback]");
-    const count = section.querySelector("[data-depth-count]");
     const images = Array.from(fallback?.querySelectorAll("img") || []);
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
@@ -129,14 +128,6 @@ export default function initDepthGallery() {
         plane.position.y = plane.userData.baseY - state.eased * 0.3 + drift * 0.35;
         plane.rotation.z = plane.userData.baseRotation + velocity * 4;
       });
-
-      if (count) {
-        const visibleIndex = Math.min(
-          state.planes.length,
-          Math.max(1, Math.round(lerp(1, state.planes.length, state.eased))),
-        );
-        count.textContent = String(visibleIndex).padStart(2, "0");
-      }
 
       section.style.setProperty("--depth-progress", state.eased.toFixed(3));
       renderer.render(scene, camera);
