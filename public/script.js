@@ -1,20 +1,27 @@
 const FORM_ID = "ddabb69a-a264-4677-8bad-614bcc5e8f09";
-const FALLBACK_DONATION_URL =
-  "https://www.nuuncollective.com?donate&formid=ddabb69a-a264-4677-8bad-614bcc5e8f09";
 
-function openDonationOverlay() {
-  if (typeof window !== "undefined" && window.CharityStack?.openOverlay) {
-    window.CharityStack.openOverlay(FORM_ID);
-    return;
-  }
+function showDonationForm() {
+  const form = document.getElementById(FORM_ID);
+  const support = document.getElementById("support");
+  const target = form || support;
 
-  window.location.href = FALLBACK_DONATION_URL;
+  if (!target) return;
+
+  window.history.replaceState(null, "", "#support");
+  target.scrollIntoView({ behavior: "smooth", block: "center" });
 }
 
 function setupDonationButtons() {
   document.querySelectorAll("[data-donate]").forEach((button) => {
-    button.addEventListener("click", openDonationOverlay);
+    button.addEventListener("click", showDonationForm);
   });
+}
+
+function setupDonationDeepLink() {
+  const params = new URLSearchParams(window.location.search);
+  if (params.has("donate") || params.has("formid")) {
+    window.setTimeout(showDonationForm, 450);
+  }
 }
 
 function setupHeader() {
@@ -73,6 +80,7 @@ function setupProcessSteps() {
 }
 
 setupDonationButtons();
+setupDonationDeepLink();
 setupHeader();
 setupReveal();
 setupProcessSteps();

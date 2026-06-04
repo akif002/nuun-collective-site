@@ -1,0 +1,72 @@
+---
+const galleryImages = [
+  {
+    src: "/assets/gallery/nuun-gallery-01.jpg",
+    alt: "Nuun event photo collage with community members and a room gathering",
+  },
+  {
+    src: "/assets/gallery/nuun-gallery-02.jpg",
+    alt: "Nuun writing session collage with speaker and table discussion",
+  },
+  {
+    src: "/assets/gallery/nuun-gallery-03.jpg",
+    alt: "Nuun community gathering collage with attendees listening",
+  },
+  {
+    src: "/assets/gallery/nuun-gallery-04.jpg",
+    alt: "Nuun event audience seated for a community conversation",
+  },
+  {
+    src: "/assets/gallery/nuun-gallery-05.jpg",
+    alt: "Nuun speaker with microphone and Nuun coffee detail",
+  },
+  {
+    src: "/assets/gallery/nuun-gallery-06.jpg",
+    alt: "Nuun community members at an event and presentation",
+  },
+  {
+    src: "/assets/gallery/nuun-gallery-07.jpg",
+    alt: "Nuun writing session table collage with notebooks and coffee",
+  },
+  {
+    src: "/assets/gallery/nuun-gallery-08.jpg",
+    alt: "Nuun room and writing collage with attendees and presenters",
+  },
+];
+---
+
+<section class="depth-intro" id="top" data-depth-intro aria-label="Nuun event photo intro">
+  <div class="depth-stage">
+    <canvas class="depth-canvas" data-depth-canvas aria-hidden="true"></canvas>
+
+    <div class="depth-vignette" aria-hidden="true"></div>
+
+    <div class="depth-copy">
+      <p class="section-label">Dallas / Rooms / Records</p>
+      <h1>Before the page, there is the room.</h1>
+      <p>
+        Scroll through the people, tables, notes, and conversations that become Nuun.
+      </p>
+      <span>Scroll to enter</span>
+    </div>
+
+    <div class="depth-counter" aria-hidden="true">
+      <span>Archive</span>
+      <strong data-depth-count>01</strong>
+    </div>
+
+    <div class="depth-fallback" data-depth-fallback>
+      {
+        galleryImages.map((image, index) => (
+          <img src={image.src} alt={image.alt} loading={index < 2 ? "eager" : "lazy"} />
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<script>
+  import initDepthGallery from "../scripts/depth-gallery.js";
+
+  initDepthGallery();
+</script>
