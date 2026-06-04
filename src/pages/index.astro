@@ -34,7 +34,6 @@ import "../styles/global.css";
       </a>
       <nav class="desktop-nav" aria-label="Primary navigation">
         <a href="#about">About</a>
-        <a href="#events">Events</a>
         <a href="#writing">Writing</a>
         <a href="#media">Media</a>
         <a href="#support">Donate</a>
@@ -71,50 +70,8 @@ import "../styles/global.css";
         </div>
       </section>
 
-      <section class="scripture-section" aria-labelledby="mission-title">
-        <div class="scripture-card reveal">
-          <p class="section-label">The Mission</p>
-          <h2 id="mission-title">
-            We seek to empower the community through the exertion of the mind
-            <span>by way of the pen.</span>
-          </h2>
-          <blockquote>
-            “Nūn. By the Pen, and what they inscribe, you are not [O Muhammad], by
-            the grace of your Lord, a madman. And yours shall be an unfailing reward.
-            And you indeed are of tremendous character.”
-          </blockquote>
-          <cite>Qur’an, Surah Al-Qalam 1–4</cite>
-        </div>
-      </section>
-
-      <section class="section about-section" id="about" aria-labelledby="about-title">
-        <div class="section-label reveal">01 / What Nuun Does</div>
-        <div class="section-body reveal">
-          <h2 id="about-title">A community think tank.</h2>
-          <p>
-            Nuun Collective builds a culture of thinkers who lead, builders who change, and
-            collaborators driven by purpose. Through talks, events, and writing sessions, we move
-            critical thought toward meaningful action.
-          </p>
-          <div class="compact-grid">
-            <article>
-              <h3>Events</h3>
-              <p>Speaker conversations, prompts, silent writing, and discussion.</p>
-            </article>
-            <article>
-              <h3>Writing</h3>
-              <p>Essays, transcripts, reflections, and published thought.</p>
-            </article>
-            <article>
-              <h3>Media</h3>
-              <p>Videos, audio, and transcripts that keep the conversation moving.</p>
-            </article>
-          </div>
-        </div>
-      </section>
-
       <section class="section problem-section" id="problem" aria-labelledby="problem-title">
-        <div class="section-label reveal">02 / The Problem</div>
+        <div aria-hidden="true"></div>
         <div class="problem-layout reveal">
           <div>
             <h2 id="problem-title">Complaint without culture becomes a loop.</h2>
@@ -148,19 +105,50 @@ import "../styles/global.css";
         </div>
       </section>
 
-      <section class="image-break" id="events" aria-label="Nuun event visual">
-        <div class="media-feature reveal">
-          <figure>
-            <img
-              src="/assets/media/nuun-event.jpg"
-              alt="Nuun speaker holding a microphone at a community gathering"
-            />
-          </figure>
-          <div class="quote-card">
-            <p>What is Nuun?</p>
-            <strong>Narratives script human behavior the way code scripts computers.</strong>
-            <span>From conversation to action.</span>
+      <section class="section about-section" id="about" aria-labelledby="about-title">
+        <figure class="about-image reveal">
+          <img
+            src="/assets/media/nuun-event.jpg"
+            alt="Nuun speaker holding a microphone at a community gathering"
+          />
+        </figure>
+        <div class="section-body reveal">
+          <h2 id="about-title">A community think tank.</h2>
+          <p>
+            Nuun Collective builds a culture of thinkers who lead, builders who change, and
+            collaborators driven by purpose. Through talks, events, and writing sessions, we move
+            critical thought toward meaningful action.
+          </p>
+          <div class="compact-grid">
+            <article>
+              <h3>Events</h3>
+              <p>Speaker conversations, prompts, silent writing, and discussion.</p>
+            </article>
+            <article>
+              <h3>Writing</h3>
+              <p>Essays, transcripts, reflections, and published thought.</p>
+            </article>
+            <article>
+              <h3>Media</h3>
+              <p>Videos, audio, and transcripts that keep the conversation moving.</p>
+            </article>
           </div>
+        </div>
+      </section>
+
+      <section class="scripture-section" aria-labelledby="mission-title">
+        <div class="scripture-card reveal">
+          <p class="section-label">The Mission</p>
+          <h2 id="mission-title">
+            We seek to empower the community through the exertion of the mind
+            <span>by way of the pen.</span>
+          </h2>
+          <blockquote>
+            “Nūn. By the Pen, and what they inscribe, you are not [O Muhammad], by
+            the grace of your Lord, a madman. And yours shall be an unfailing reward.
+            And you indeed are of tremendous character.”
+          </blockquote>
+          <cite>Qur’an, Surah Al-Qalam 1–4</cite>
         </div>
       </section>
 
@@ -173,24 +161,6 @@ import "../styles/global.css";
             Start with the archive, then follow the conversations as they publish.
           </p>
           <div class="writing-wall">
-            <a
-              class="feature-card"
-              href="https://www.nuuncollective.com/"
-              target="_blank"
-              rel="noreferrer"
-            >
-              <figure>
-                <img
-                  src="/assets/screenshots/substack-home.png"
-                  alt="Screenshot of the Nuun Substack archive"
-                />
-              </figure>
-              <div class="feature-copy">
-                <small>Writing Archive</small>
-                <strong>Nuun Newsletter</strong>
-                <span>Read the archive</span>
-              </div>
-            </a>
             <div class="writing-stack">
               <a
                 href="https://www.nuuncollective.com/p/nuun-x-oak-cliff-tale-of-two-cities"
