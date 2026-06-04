@@ -38,7 +38,17 @@ import "../styles/global.css";
         <a href="#media">Media</a>
         <a href="#support">Donate</a>
       </nav>
-      <button class="button button-donate" type="button" data-donate>Donate</button>
+      <div class="header-actions">
+        <button class="button button-donate" type="button" data-donate>Donate</button>
+        <a
+          class="button button-follow header-follow"
+          href="https://www.instagram.com/nuun.collective/"
+          target="_blank"
+          rel="noreferrer"
+        >
+          Follow
+        </a>
+      </div>
     </header>
 
     <main id="main">
@@ -224,7 +234,6 @@ import "../styles/global.css";
       </section>
 
       <section class="section media-section" id="media" aria-labelledby="media-title">
-        <div class="section-label reveal">04 / Media</div>
         <div class="section-body reveal">
           <h2 id="media-title">Watch, listen, follow.</h2>
           <p>
@@ -268,18 +277,17 @@ import "../styles/global.css";
             Nuun is completely bootstrapped. Everything so far has been funded by selling
             notebooks, merch, and putting in our own personal money.
           </p>
-          <ul class="support-facts" aria-label="Why support Nuun">
+          <ul class="support-notes" aria-label="Why support Nuun">
             <li>
-              <strong>8</strong>
-              <span>young Dallas Muslims building this because we love the effort.</span>
+              <strong>$0 institutional funding.</strong>
+              <span>Fully bootstrapped by the team and community support.</span>
             </li>
             <li>
-              <strong>$0</strong>
-              <span>institutional funding behind the work right now.</span>
+              <strong>Every dollar helps cover events, media, and more.</strong>
             </li>
             <li>
-              <strong>Every dollar</strong>
-              <span>helps cover rooms, media, publishing, and the next gathering.</span>
+              <strong>10+ events hosted.</strong>
+              <span>Average attendance is around 150 people, with our biggest events reaching 500 attendees.</span>
             </li>
           </ul>
           <button class="button button-donate" type="button" data-donate>Donate to Nuun</button>
@@ -320,10 +328,5 @@ import "../styles/global.css";
       <p>Nuun Collective / Dallas / Thinking / Writing / Action</p>
       <p>© 2026 Nuun Collective. All rights reserved.</p>
     </footer>
-
-    <div class="mobile-sticky" aria-label="Mobile quick actions">
-      <button type="button" data-donate>Donate</button>
-      <a href="https://www.instagram.com/nuun.collective/" target="_blank" rel="noreferrer">Follow</a>
-    </div>
   </body>
 </html>
