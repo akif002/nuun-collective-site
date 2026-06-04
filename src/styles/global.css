@@ -652,9 +652,15 @@ p {
 
 .writing-wall {
   display: grid;
-  grid-template-columns: minmax(0, 1.25fr) minmax(300px, 0.75fr);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-auto-rows: 1fr;
   gap: 1rem;
   margin-top: 1.5rem;
+}
+
+.writing-wall > .feature-card,
+.writing-stack a {
+  min-height: 100%;
 }
 
 .feature-card,
@@ -693,7 +699,7 @@ p {
 }
 
 .feature-card figure {
-  height: clamp(270px, 33vw, 480px);
+  height: clamp(235px, 26vw, 320px);
   margin: 0;
   overflow: hidden;
   background: var(--nuun-cream);
@@ -746,18 +752,18 @@ p {
 }
 
 .writing-stack {
-  display: grid;
-  gap: 1rem;
+  display: contents;
 }
 
 .writing-stack a {
-  min-height: 100%;
   display: grid;
-  grid-template-rows: minmax(210px, 0.9fr) auto;
+  grid-template-rows: clamp(235px, 26vw, 320px) auto;
+  min-height: 0;
 }
 
 .writing-stack a > img {
-  min-height: 210px;
+  min-height: 0;
+  max-height: none;
 }
 
 .writing-stack a > div,
@@ -769,7 +775,7 @@ p {
 }
 
 .writing-stack strong {
-  font-size: clamp(1.7rem, 3vw, 3.2rem);
+  font-size: clamp(1.55rem, 2.2vw, 2.55rem);
 }
 
 .channel-grid {
@@ -976,9 +982,12 @@ p {
     grid-template-columns: 1fr 1fr;
   }
 
-  .writing-wall,
   .channel-grid {
     grid-template-columns: 1fr;
+  }
+
+  .writing-wall {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .media-feature {
@@ -1055,7 +1064,8 @@ p {
 
   .compact-grid,
   .problem-list,
-  .support-facts {
+  .support-facts,
+  .writing-wall {
     grid-template-columns: 1fr;
   }
 
