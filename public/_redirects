@@ -1,0 +1,2 @@
+/read https://www.nuuncollective.com/ 301
+/read/* https://www.nuuncollective.com/:splat 301
