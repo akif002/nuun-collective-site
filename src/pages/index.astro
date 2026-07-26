@@ -1,5 +1,7 @@
 ---
 import DepthIntro from "../components/DepthIntro.astro";
+import HeroDots from "../components/HeroDots.astro";
+import HeroPenLogo from "../components/HeroPenLogo";
 import "../styles/global.css";
 ---
 
@@ -55,7 +57,12 @@ import "../styles/global.css";
       <DepthIntro />
 
       <section class="hero" aria-labelledby="hero-title">
+        <HeroDots />
         <div class="hero-inner">
+          <div class="hero-logo reveal">
+            <HeroPenLogo className="hero-pen-logo" client:load />
+          </div>
+
           <div class="hero-copy reveal">
             <h1 id="hero-title">
               Bridging engagement with tangible outcomes to solve local challenges.
@@ -72,28 +79,20 @@ import "../styles/global.css";
             </div>
           </div>
 
-          <div class="hero-logo reveal" aria-hidden="true">
-            <div class="logo-panel">
-              <img src="/assets/logos/nuun-wordmark-orange.png" alt="" />
-            </div>
-          </div>
         </div>
       </section>
 
       <section class="section problem-section" id="problem" aria-labelledby="problem-title">
         <div class="problem-gallery reveal" aria-label="Nuun Collective community moments">
-          <img
-            src="/assets/gallery/nuun-community-sunni-shia.png"
-            alt="Panelists seated beneath a projected Sunni and Shia dialogue title"
-          />
-          <img
-            src="/assets/gallery/nuun-community-paradigm-culture.png"
-            alt="Nuun speaker conversation in front of a Paradigm of Culture projection"
-          />
-          <img
-            src="/assets/gallery/nuun-community-attendee.png"
-            alt="Community member listening during a Nuun event"
-          />
+          <button type="button" class="gallery-trigger" data-lightbox-src="/assets/gallery/Nuun5Suad-7.jpg" data-lightbox-alt="Wide view of a Nuun community event with attendees and speakers">
+            <img src="/assets/gallery/Nuun5Suad-7.jpg" alt="Wide view of a Nuun community event with attendees and speakers" />
+          </button>
+          <button type="button" class="gallery-trigger" data-lightbox-src="/assets/gallery/nuun-community-paradigm-culture.png" data-lightbox-alt="Nuun speaker conversation in front of a Paradigm of Culture projection">
+            <img src="/assets/gallery/nuun-community-paradigm-culture.png" alt="Nuun speaker conversation in front of a Paradigm of Culture projection" />
+          </button>
+          <button type="button" class="gallery-trigger" data-lightbox-src="/assets/gallery/IMG_9694.jpg" data-lightbox-alt="Nuun community members speaking together at an event">
+            <img src="/assets/gallery/IMG_9694.jpg" alt="Nuun community members speaking together at an event" />
+          </button>
         </div>
         <div class="problem-layout reveal">
           <div>
@@ -130,18 +129,15 @@ import "../styles/global.css";
 
       <section class="section about-section" id="about" aria-labelledby="about-title">
         <figure class="about-image reveal">
-          <img
-            src="/assets/media/nuun-event.jpg"
-            alt="Nuun speaker holding a microphone at a community gathering"
-          />
-          <img
-            src="/assets/gallery/nuun-community-table.png"
-            alt="Three attendees smiling together at a Nuun gathering"
-          />
-          <img
-            src="/assets/gallery/nuun-community-room.png"
-            alt="Black and white wide view of a Nuun speaker event"
-          />
+          <button type="button" class="gallery-trigger" data-lightbox-src="/assets/media/nuun-event.jpg" data-lightbox-alt="Nuun speaker holding a microphone at a community gathering">
+            <img src="/assets/media/nuun-event.jpg" alt="Nuun speaker holding a microphone at a community gathering" />
+          </button>
+          <button type="button" class="gallery-trigger" data-lightbox-src="/assets/gallery/nuun-community-table.png" data-lightbox-alt="Three attendees smiling together at a Nuun gathering">
+            <img src="/assets/gallery/nuun-community-table.png" alt="Three attendees smiling together at a Nuun gathering" />
+          </button>
+          <button type="button" class="gallery-trigger" data-lightbox-src="/assets/gallery/Nuun5Suad-39.jpg" data-lightbox-alt="Wide view of a Nuun community event with attendees and speakers">
+            <img src="/assets/gallery/Nuun5Suad-39.jpg" alt="Wide view of a Nuun community event with attendees and speakers" />
+          </button>
         </figure>
         <div class="section-body reveal">
           <h2 id="about-title">A community think tank.</h2>
@@ -184,7 +180,6 @@ import "../styles/global.css";
       </section>
 
       <section class="section writing-section" id="writing" aria-labelledby="writing-title">
-        <div class="section-label reveal">03 / Writing</div>
         <div class="section-body reveal">
           <h2 id="writing-title">Writing that leaves the room.</h2>
           <p>
@@ -320,7 +315,6 @@ import "../styles/global.css";
               </span>
             </li>
           </ul>
-          <button class="button button-donate" type="button" data-donate>Donate to Nuun</button>
         </div>
         <div class="support-embed reveal" aria-label="Nuun donation form">
           <div class="embed-frame">
@@ -343,6 +337,11 @@ import "../styles/global.css";
         </div>
       </section>
     </main>
+
+    <dialog class="image-lightbox" data-image-lightbox aria-label="Expanded gallery image">
+      <button class="image-lightbox-close" type="button" data-lightbox-close aria-label="Close image viewer">×</button>
+      <img data-lightbox-image alt="" />
+    </dialog>
 
     <footer class="site-footer">
       <a class="brand-logo small" href="#top" aria-label="Nuun Collective home">

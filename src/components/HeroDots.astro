@@ -1,0 +1,63 @@
+<div class="hero-dots" data-hero-dots aria-hidden="true"></div>
+
+<script>
+  type VantaInstance = { destroy: () => void };
+
+  type VantaWindow = Window & {
+    THREE?: unknown;
+    VANTA?: {
+      DOTS: (options: Record<string, unknown>) => VantaInstance;
+    };
+  };
+
+  const host = document.querySelector<HTMLElement>("[data-hero-dots]");
+  const vantaWindow = window as VantaWindow;
+  let effect: VantaInstance | undefined;
+
+  const loadScript = (source: string) =>
+    new Promise<void>((resolve, reject) => {
+      const existing = document.querySelector<HTMLScriptElement>(`script[src="${source}"]`);
+      if (existing) {
+        resolve();
+        return;
+      }
+
+      const script = document.createElement("script");
+      script.src = source;
+      script.async = true;
+      script.onload = () => resolve();
+      script.onerror = () => reject(new Error(`Unable to load ${source}`));
+      document.head.append(script);
+    });
+
+  if (host && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    loadScript("https://cdnjs.cloudflare.com/ajax/libs/three.js/r121/three.min.js")
+      .then(() => loadScript("https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.dots.min.js"))
+      .then(() => {
+        if (!host.isConnected || !vantaWindow.VANTA) return;
+
+        effect = vantaWindow.VANTA.DOTS({
+          el: host,
+          mouseControls: true,
+          touchControls: true,
+          gyroControls: false,
+          minHeight: 200,
+          minWidth: 200,
+          scale: 1,
+          scaleMobile: 1,
+          size: 1.5,
+          spacing: 9,
+          showLines: false,
+          // Transparent so the site's shared section gradient remains visible below the dots.
+          backgroundAlpha: 0,
+          backgroundColor: 0x0b0b0a,
+          color: 0xe0753f,
+          color2: 0xe0753f,
+        });
+      })
+      // The hero remains visually complete if a third-party visual cannot load.
+      .catch(() => undefined);
+  }
+
+  window.addEventListener("pagehide", () => effect?.destroy(), { once: true });
+</script>

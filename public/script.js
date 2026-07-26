@@ -82,8 +82,30 @@ function setupProcessSteps() {
   if (buttons[0]) activate(buttons[0]);
 }
 
+function setupImageLightbox() {
+  const dialog = document.querySelector("[data-image-lightbox]");
+  const image = dialog?.querySelector("[data-lightbox-image]");
+  const close = dialog?.querySelector("[data-lightbox-close]");
+
+  if (!dialog || !image || !close || typeof dialog.showModal !== "function") return;
+
+  document.querySelectorAll("[data-lightbox-src]").forEach((trigger) => {
+    trigger.addEventListener("click", () => {
+      image.src = trigger.dataset.lightboxSrc || "";
+      image.alt = trigger.dataset.lightboxAlt || "";
+      dialog.showModal();
+    });
+  });
+
+  close.addEventListener("click", () => dialog.close());
+  dialog.addEventListener("click", (event) => {
+    if (event.target === dialog) dialog.close();
+  });
+}
+
 setupDonationButtons();
 setupDonationDeepLink();
 setupHeader();
 setupReveal();
 setupProcessSteps();
+setupImageLightbox();

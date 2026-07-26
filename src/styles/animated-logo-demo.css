@@ -1,0 +1,132 @@
+.logo-demo {
+  width: min(var(--max), calc(100% - 8vw));
+  margin: 7rem auto;
+  font-family: var(--body);
+}
+
+.logo-demo__header,
+.logo-demo__controls,
+.logo-demo__grid {
+  display: flex;
+}
+
+.logo-demo__header {
+  align-items: end;
+  justify-content: space-between;
+  gap: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.logo-demo__eyebrow,
+.logo-demo__panel > p {
+  margin: 0;
+  color: var(--nuun-orange);
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.logo-demo h2 {
+  margin: 0.2rem 0 0;
+  font-family: var(--display);
+  font-size: clamp(2rem, 5vw, 4rem);
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  line-height: 0.9;
+  text-transform: uppercase;
+}
+
+.logo-demo__controls {
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 0.5rem;
+}
+
+.logo-demo button {
+  border: 1px solid rgba(229, 225, 214, 0.42);
+  padding: 0.72rem 0.85rem;
+  background: #1a1917;
+  color: var(--nuun-cream);
+  cursor: pointer;
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.logo-demo button:hover,
+.logo-demo button[aria-pressed="true"] {
+  border-color: var(--nuun-orange);
+  background: var(--nuun-donation);
+}
+
+.logo-demo__grid {
+  gap: 1rem;
+}
+
+.logo-demo__grid--studies {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.logo-demo__grid--studies .logo-demo__panel:last-child {
+  grid-column: 1 / -1;
+}
+
+.logo-demo__panel {
+  flex: 1 1 0;
+  min-width: 0;
+  padding: clamp(1.25rem, 4vw, 2.5rem);
+}
+
+.logo-demo__panel--light {
+  background: var(--nuun-cream);
+  color: var(--nuun-charcoal);
+}
+
+.logo-demo__panel--dark {
+  background: #151412;
+  color: var(--nuun-cream);
+  box-shadow: inset 0 0 0 1px rgba(229, 225, 214, 0.1);
+}
+
+.logo-demo__mark {
+  width: min(100%, 430px);
+  margin-top: clamp(2.5rem, 8vw, 5rem);
+}
+
+.logo-demo__description {
+  display: block;
+  max-width: 28rem;
+  margin-top: 0.45rem;
+  color: currentColor;
+  font-size: 0.86rem;
+  font-weight: 500;
+  line-height: 1.35;
+  opacity: 0.7;
+}
+
+@media (max-width: 640px) {
+  .logo-demo {
+    margin-block: 4rem;
+  }
+
+  .logo-demo__header,
+  .logo-demo__grid {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .logo-demo__grid--studies {
+    display: flex;
+  }
+
+  .logo-demo__grid--studies .logo-demo__panel:last-child {
+    grid-column: auto;
+  }
+
+  .logo-demo__controls {
+    justify-content: flex-start;
+  }
+}

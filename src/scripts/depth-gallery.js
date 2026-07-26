@@ -15,8 +15,8 @@ function getWebGLSupport() {
 function makePlaneGeometry(texture, viewport) {
   const image = texture.image;
   const ratio = image && image.width && image.height ? image.width / image.height : 1;
-  const base = viewport.width < 680 ? 3.2 : 4.15;
-  const height = base / Math.max(ratio, 0.8);
+  const base = viewport.width < 680 ? 2.3 : 3.85;
+  const height = base / ratio;
   return new THREE.PlaneGeometry(base, height);
 }
 
@@ -76,14 +76,14 @@ export default function initDepthGallery() {
       disposed: false,
       planes: [],
       patterns: [
-        [-1.9, 0.65, -0.07],
-        [1.65, -0.3, 0.08],
-        [-0.15, 0.15, -0.035],
-        [1.95, 0.75, 0.06],
-        [-1.7, -0.65, -0.08],
-        [0.35, -0.2, 0.035],
-        [-2.05, 0.2, 0.07],
-        [1.4, -0.72, -0.055],
+        [-0.72, 0.35, -0.035],
+        [0.66, -0.22, 0.045],
+        [-0.16, 0.12, -0.025],
+        [0.78, 0.48, 0.035],
+        [-0.65, -0.4, -0.045],
+        [0.22, -0.12, 0.025],
+        [-0.82, 0.18, 0.04],
+        [0.58, -0.46, -0.035],
       ],
     };
 
@@ -108,11 +108,12 @@ export default function initDepthGallery() {
       state.eased += (state.progress - state.eased) * 0.08;
       const velocity = state.eased - state.previous;
       state.previous = state.eased;
+      const mobile = state.viewport.width < 680;
 
       const finalDepth = Math.max((state.planes.length - 1) * 2.65, 1);
       camera.position.z = 5.5 - state.eased * (finalDepth + 6.2);
-      camera.position.x = Math.sin(state.eased * Math.PI * 1.7) * 0.38 + velocity * 18;
-      camera.position.y = Math.cos(state.eased * Math.PI * 1.15) * 0.12 - state.eased * 0.16;
+      camera.position.x = Math.sin(state.eased * Math.PI * 1.7) * (mobile ? 0.1 : 0.22) + velocity * (mobile ? 3 : 8);
+      camera.position.y = Math.cos(state.eased * Math.PI * 1.15) * (mobile ? 0.06 : 0.1) - state.eased * 0.12;
       camera.lookAt(camera.position.x * 0.1, camera.position.y * 0.1, camera.position.z - 5.6);
 
       group.rotation.z = velocity * 2.8;
@@ -124,9 +125,9 @@ export default function initDepthGallery() {
         const drift = Math.sin(state.eased * Math.PI * 2 + index) * 0.05;
 
         plane.material.opacity = lerp(0.16, 1, focus);
-        plane.position.x = plane.userData.baseX + velocity * plane.userData.velocityPush + drift;
-        plane.position.y = plane.userData.baseY - state.eased * 0.3 + drift * 0.35;
-        plane.rotation.z = plane.userData.baseRotation + velocity * 4;
+        plane.position.x = plane.userData.baseX + velocity * plane.userData.velocityPush + drift * (mobile ? 0.45 : 1);
+        plane.position.y = plane.userData.baseY - state.eased * (mobile ? 0.16 : 0.24) + drift * 0.35;
+        plane.rotation.z = plane.userData.baseRotation + velocity * (mobile ? 2 : 3);
       });
 
       section.style.setProperty("--depth-progress", state.eased.toFixed(3));
@@ -150,12 +151,12 @@ export default function initDepthGallery() {
         const pattern = state.patterns[index % state.patterns.length];
         const mobile = state.viewport.width < 680;
 
-        mesh.position.set(mobile ? pattern[0] * 0.45 : pattern[0], mobile ? pattern[1] * 0.72 : pattern[1], -index * 2.65);
+        mesh.position.set(mobile ? pattern[0] * 0.62 : pattern[0], mobile ? pattern[1] * 0.72 : pattern[1], -index * 2.65);
         mesh.rotation.z = mobile ? pattern[2] * 0.5 : pattern[2];
         mesh.userData.baseX = mesh.position.x;
         mesh.userData.baseY = mesh.position.y;
         mesh.userData.baseRotation = mesh.rotation.z;
-        mesh.userData.velocityPush = mobile ? 5 : 12;
+        mesh.userData.velocityPush = mobile ? 1.5 : 6;
 
         group.add(mesh);
         state.planes.push(mesh);
