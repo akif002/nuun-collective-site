@@ -32,9 +32,11 @@
   font-family: var(--display);
   font-size: clamp(2rem, 5vw, 4rem);
   font-weight: 800;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.042em;
   line-height: 0.9;
   text-transform: uppercase;
+  transform: scaleX(var(--display-width));
+  transform-origin: left center;
 }
 
 .logo-demo__controls {

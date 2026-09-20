@@ -1,79 +1,106 @@
 ---
 const galleryImages = [
   {
-    src: "/assets/gallery/nuun-gallery-05.jpg",
+    src: "/assets/gallery/nuun-gallery-05.webp",
+    width: 643,
+    height: 796,
     alt: "Nuun speaker with microphone and Nuun coffee detail",
   },
   {
-    src: "/assets/gallery/IMG_8374.jpg",
+    src: "/assets/gallery/IMG_8374.webp",
+    width: 1067,
+    height: 1600,
     alt: "Nuun speaker holding a microphone during a community conversation",
   },
   {
-    src: "/assets/gallery/IMG_8412.jpg",
+    src: "/assets/gallery/IMG_8412.webp",
+    width: 1067,
+    height: 1600,
     alt: "Nuun speaker addressing attendees at a community event",
   },
   {
-    src: "/assets/gallery/IMG_9694.jpg",
+    src: "/assets/gallery/IMG_9694.webp",
+    width: 1600,
+    height: 1067,
     alt: "Nuun community members gathered together at an event",
   },
   {
-    src: "/assets/gallery/IMG_9922.jpg",
+    src: "/assets/gallery/IMG_9922.webp",
+    width: 1600,
+    height: 1067,
     alt: "Nuun event audience listening during a conversation",
   },
   {
-    src: "/assets/gallery/IMG_9959.jpg",
+    src: "/assets/gallery/IMG_9959.webp",
+    width: 1067,
+    height: 1600,
     alt: "Nuun community conversation with attendees seated in a room",
   },
   {
-    src: "/assets/gallery/Nuun5Suad-15.jpg",
+    src: "/assets/gallery/Nuun5Suad-15.webp",
+    width: 1600,
+    height: 1067,
     alt: "Nuun speaker and attendees during an event",
   },
   {
-    src: "/assets/gallery/Nuun5Suad-39.jpg",
+    src: "/assets/gallery/Nuun5Suad-39.webp",
+    width: 1600,
+    height: 1067,
     alt: "Nuun event room with attendees and a speaker",
   },
   {
-    src: "/assets/gallery/Nuun5Suad-7.jpg",
+    src: "/assets/gallery/Nuun5Suad-7.webp",
+    width: 1067,
+    height: 1600,
     alt: "Nuun community members gathered for discussion",
   },
   {
-    src: "/assets/gallery/nuun-community-paradigm-culture.png",
+    src: "/assets/gallery/nuun-community-paradigm-culture.webp",
+    width: 682,
+    height: 1024,
     alt: "Nuun speaker conversation in front of a Paradigm of Culture projection",
   },
   {
-    src: "/assets/gallery/nuun-community-sunni-shia.png",
+    src: "/assets/gallery/nuun-community-sunni-shia.webp",
+    width: 1024,
+    height: 682,
     alt: "Panelists seated beneath a projected Sunni and Shia dialogue title",
   },
   {
-    src: "/assets/gallery/nuun-gallery-03.jpg",
+    src: "/assets/gallery/nuun-gallery-03.webp",
+    width: 531,
+    height: 747,
     alt: "Nuun community gathering collage with attendees listening",
   },
   {
-    src: "/assets/gallery/nuun-gallery-07.jpg",
+    src: "/assets/gallery/nuun-gallery-07.webp",
+    width: 618,
+    height: 832,
     alt: "Nuun writing session table collage with notebooks and coffee",
   },
   {
-    src: "/assets/gallery/nuun-gallery-08.jpg",
+    src: "/assets/gallery/nuun-gallery-08.webp",
+    width: 701,
+    height: 741,
     alt: "Nuun room and writing collage with attendees and presenters",
   },
 ];
 ---
 
-<section class="depth-intro" id="top" data-depth-intro aria-label="Nuun event photo intro">
+<section class="depth-intro is-animated" id="top" data-depth-intro aria-label="Nuun event photo intro">
   <div class="depth-stage">
     <canvas class="depth-canvas" data-depth-canvas aria-hidden="true"></canvas>
-
     <div class="depth-vignette" aria-hidden="true"></div>
 
     <div class="depth-copy">
       <h1>Narratives script human behavior, how code scripts computers.</h1>
-      <span>Scroll to enter</span>
     </div>
+    <span class="depth-enter">Scroll to enter</span>
 
     <div class="depth-fallback" data-depth-fallback>
       {
         galleryImages.map((image, index) => (
-          <img src={image.src} alt={image.alt} loading={index < 2 ? "eager" : "lazy"} />
+          <img src={index === 0 ? image.src : undefined} data-src={index === 0 ? undefined : image.src} alt={image.alt} width={image.width} height={image.height} loading={index === 0 ? "eager" : "lazy"} decoding={index === 0 ? "sync" : "async"} fetchpriority={index === 0 ? "high" : "auto"} />
         ))
       }
     </div>

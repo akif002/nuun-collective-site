@@ -15,6 +15,8 @@ import "../styles/global.css";
       content="Nuun Collective is a Dallas-based Muslim community think tank for events, writing, media, and action."
     />
     <title>Nuun Collective</title>
+    <link rel="preload" href="/assets/gallery/nuun-gallery-05.webp" as="image" fetchpriority="high" />
+    <link rel="preload" href="/assets/fonts/rama-gothic-c-heavy.otf" as="font" type="font/otf" crossorigin />
     <!-- Start of CharityStack Embed -->
     <script
       type="text/javascript"
@@ -60,7 +62,7 @@ import "../styles/global.css";
         <HeroDots />
         <div class="hero-inner">
           <div class="hero-logo reveal">
-            <HeroPenLogo className="hero-pen-logo" client:load />
+            <HeroPenLogo className="hero-pen-logo" client:visible />
           </div>
 
           <div class="hero-copy reveal">
@@ -83,46 +85,28 @@ import "../styles/global.css";
       </section>
 
       <section class="section problem-section" id="problem" aria-labelledby="problem-title">
-        <div class="problem-layout reveal">
-          <div>
-            <h2 id="problem-title">Complaint without culture becomes a loop.</h2>
-            <p>
-              Nuun exists to interrupt that loop by making serious thinking, writing, and action
-              feel communal, beautiful, and urgent.
-            </p>
-          </div>
-          <div class="problem-list">
-            <article>
-              <small>Problem 01</small>
-              <h3>Dogma</h3>
-              <p>When questions become taboo, thought becomes defensive instead of alive.</p>
-            </article>
-            <article>
-              <small>Problem 02</small>
-              <h3>Complacency</h3>
-              <p>Communities name urgent problems, then fail to build habits of response.</p>
-            </article>
-            <article>
-              <small>Problem 03</small>
-              <h3>Fragmentation</h3>
-              <p>Energy exists, but it is scattered across rooms that rarely meet.</p>
-            </article>
-            <article>
-              <small>Problem 04</small>
-              <h3>Cultural Illiteracy</h3>
-              <p>Public life needs shared references, language, and intellectual diet.</p>
-            </article>
-          </div>
+        <div class="problem-copy reveal">
+          <h2 id="problem-title">A place to think together.</h2>
+          <p>
+            We need places where Muslims can ask difficult questions, disagree openly,
+            and work through the issues that affect our communities. Too often, those
+            conversations stay within familiar circles or end without a next step.
+          </p>
+          <p>
+            Nuun brings people together through talks, reading, and writing. We make time
+            to examine ideas, learn from one another, and decide what we can do together
+            here in Dallas.
+          </p>
         </div>
         <div class="problem-gallery reveal" aria-label="Nuun Collective community moments">
-          <button type="button" class="gallery-trigger" data-lightbox-src="/assets/gallery/Nuun5Suad-7.jpg" data-lightbox-alt="Wide view of a Nuun community event with attendees and speakers">
-            <img src="/assets/gallery/Nuun5Suad-7.jpg" alt="Wide view of a Nuun community event with attendees and speakers" />
+          <button type="button" class="gallery-trigger" data-lightbox-src="/assets/gallery/Nuun5Suad-7.webp" data-lightbox-alt="Wide view of a Nuun community event with attendees and speakers">
+            <img src="/assets/gallery/Nuun5Suad-7.webp" alt="Wide view of a Nuun community event with attendees and speakers" loading="lazy" decoding="async" />
           </button>
-          <button type="button" class="gallery-trigger" data-lightbox-src="/assets/gallery/nuun-community-paradigm-culture.png" data-lightbox-alt="Nuun speaker conversation in front of a Paradigm of Culture projection">
-            <img src="/assets/gallery/nuun-community-paradigm-culture.png" alt="Nuun speaker conversation in front of a Paradigm of Culture projection" />
+          <button type="button" class="gallery-trigger" data-lightbox-src="/assets/gallery/nuun-community-paradigm-culture.webp" data-lightbox-alt="Nuun speaker conversation in front of a Paradigm of Culture projection">
+            <img src="/assets/gallery/nuun-community-paradigm-culture.webp" alt="Nuun speaker conversation in front of a Paradigm of Culture projection" loading="lazy" decoding="async" />
           </button>
-          <button type="button" class="gallery-trigger" data-lightbox-src="/assets/gallery/IMG_9694.jpg" data-lightbox-alt="Nuun community members speaking together at an event">
-            <img src="/assets/gallery/IMG_9694.jpg" alt="Nuun community members speaking together at an event" />
+          <button type="button" class="gallery-trigger" data-lightbox-src="/assets/gallery/IMG_9694.webp" data-lightbox-alt="Nuun community members speaking together at an event">
+            <img src="/assets/gallery/IMG_9694.webp" alt="Nuun community members speaking together at an event" loading="lazy" decoding="async" />
           </button>
         </div>
       </section>
@@ -130,13 +114,13 @@ import "../styles/global.css";
       <section class="section about-section" id="about" aria-labelledby="about-title">
         <figure class="about-image reveal">
           <button type="button" class="gallery-trigger" data-lightbox-src="/assets/media/nuun-event.jpg" data-lightbox-alt="Nuun speaker holding a microphone at a community gathering">
-            <img src="/assets/media/nuun-event.jpg" alt="Nuun speaker holding a microphone at a community gathering" />
+            <img src="/assets/media/nuun-event.jpg" alt="Nuun speaker holding a microphone at a community gathering" loading="lazy" decoding="async" />
           </button>
           <button type="button" class="gallery-trigger" data-lightbox-src="/assets/gallery/nuun-community-table.png" data-lightbox-alt="Three attendees smiling together at a Nuun gathering">
-            <img src="/assets/gallery/nuun-community-table.png" alt="Three attendees smiling together at a Nuun gathering" />
+            <img src="/assets/gallery/nuun-community-table.png" alt="Three attendees smiling together at a Nuun gathering" loading="lazy" decoding="async" />
           </button>
-          <button type="button" class="gallery-trigger" data-lightbox-src="/assets/gallery/Nuun5Suad-39.jpg" data-lightbox-alt="Wide view of a Nuun community event with attendees and speakers">
-            <img src="/assets/gallery/Nuun5Suad-39.jpg" alt="Wide view of a Nuun community event with attendees and speakers" />
+          <button type="button" class="gallery-trigger" data-lightbox-src="/assets/gallery/Nuun5Suad-39.webp" data-lightbox-alt="Wide view of a Nuun community event with attendees and speakers">
+            <img src="/assets/gallery/Nuun5Suad-39.webp" alt="Wide view of a Nuun community event with attendees and speakers" loading="lazy" decoding="async" />
           </button>
         </figure>
         <div class="section-body reveal">
@@ -194,8 +178,10 @@ import "../styles/global.css";
                 rel="noreferrer"
               >
                 <img
-                  src="/assets/screenshots/oak-cliff-two-cities.png"
+                  src="/assets/screenshots/oak-cliff-two-cities.webp"
                   alt="Screenshot of the Nuun x Oak Cliff: Tale of Two Cities article"
+                  loading="lazy"
+                  decoding="async"
                 />
                 <div>
                   <small>Transcript + Video</small>
@@ -208,8 +194,10 @@ import "../styles/global.css";
                 rel="noreferrer"
               >
                 <img
-                  src="/assets/screenshots/incoherence.png"
+                  src="/assets/screenshots/incoherence.webp"
                   alt="Screenshot of the Incoherence article"
+                  loading="lazy"
+                  decoding="async"
                 />
                 <div>
                   <small>Essay</small>
@@ -222,8 +210,10 @@ import "../styles/global.css";
                 rel="noreferrer"
               >
                 <img
-                  src="/assets/screenshots/suhaib-webb.png"
+                  src="/assets/screenshots/suhaib-webb.webp"
                   alt="Screenshot of the NUUN x Sheikh Suhaib Webb transcript"
+                  loading="lazy"
+                  decoding="async"
                 />
                 <div>
                   <small>Transcript + Video</small>
@@ -236,8 +226,10 @@ import "../styles/global.css";
                 rel="noreferrer"
               >
                 <img
-                  src="/assets/screenshots/yasir-mahdi.png"
+                  src="/assets/screenshots/yasir-mahdi.webp"
                   alt="Screenshot of the Nuun x Dr. Yasir Qadhi x Sheikh Mahdi article"
+                  loading="lazy"
+                  decoding="async"
                 />
                 <div>
                   <small>Featured Transcript + Video</small>
@@ -258,7 +250,7 @@ import "../styles/global.css";
           </p>
           <div class="channel-grid">
             <a href="https://www.youtube.com/channel/UCuCJGcOulNp7St2E5THLN4Q" target="_blank" rel="noreferrer">
-              <img src="/assets/screenshots/youtube.png" alt="Screenshot of the Nuun YouTube channel" />
+              <img src="/assets/screenshots/youtube.webp" alt="Screenshot of the Nuun YouTube channel" loading="lazy" decoding="async" />
               <div>
                 <small>Video</small>
                 <strong>YouTube</strong>
@@ -266,7 +258,7 @@ import "../styles/global.css";
               </div>
             </a>
             <a href="https://www.instagram.com/nuun.collective/?hl=en" target="_blank" rel="noreferrer">
-              <img src="/assets/screenshots/instagram.png" alt="Screenshot of the Nuun Instagram profile" />
+              <img src="/assets/screenshots/instagram.webp" alt="Screenshot of the Nuun Instagram profile" loading="lazy" decoding="async" />
               <div>
                 <small>Live Updates</small>
                 <strong>Instagram</strong>
@@ -274,7 +266,7 @@ import "../styles/global.css";
               </div>
             </a>
             <a href="https://open.spotify.com/show/7iV1qQqXSdfRFLcmznOgUM" target="_blank" rel="noreferrer">
-              <img src="/assets/screenshots/spotify.png" alt="Screenshot of the Nuun Spotify page" />
+              <img src="/assets/screenshots/spotify.webp" alt="Screenshot of the Nuun Spotify page" loading="lazy" decoding="async" />
               <div>
                 <small>Audio</small>
                 <strong>Spotify</strong>
@@ -315,11 +307,11 @@ import "../styles/global.css";
               </span>
             </li>
           </ul>
+          <!-- CharityStack fundraising progress bar. Keep this exact div once on the page. -->
+          <div data-entity="FUNDRAISING_BAR" data-source="CharityStack" id="7f98ee6f-262f-4263-ba45-ddbd899ed38c"></div>
         </div>
         <div class="support-embed reveal" aria-label="Nuun donation form">
           <div class="embed-frame">
-            <!-- CharityStack fundraising progress bar. Keep this exact div once on the page. -->
-            <div data-entity="FUNDRAISING_BAR" data-source="CharityStack" id="7f98ee6f-262f-4263-ba45-ddbd899ed38c"></div>
             <!-- CharityStack donation form embed. Keep this exact div once on the page. -->
             <div data-entity="EMBED_FORM" data-source="CharityStack" id="ddabb69a-a264-4677-8bad-614bcc5e8f09"></div>
           </div>

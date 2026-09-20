@@ -43,7 +43,7 @@
   --line: rgba(229, 225, 214, 0.22);
   --display: "Rama Gothic C", "Arial Narrow", Impact, sans-serif;
   --display-tracking: 0.065em;
-  --display-width: 1.035;
+  --display-width: 1.16;
   --body: "Korolev", "Helvetica Neue", system-ui, sans-serif;
   --serif: "Amador", Georgia, serif;
   --max: 1160px;
@@ -89,12 +89,12 @@ body::before {
 
 body::after {
   z-index: 80;
-  opacity: 0.29;
+  opacity: 0.24;
   mix-blend-mode: screen;
   background-image:
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160' viewBox='0 0 160 160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.95' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='.72'/%3E%3C/svg%3E"),
+    url("/assets/noise.png"),
     repeating-linear-gradient(0deg, rgba(255,255,255,0.08) 0 1px, transparent 1px 3px);
-  background-size: 190px 190px, 100% 3px;
+  background-size: 96px 96px, 100% 3px;
 }
 
 a {
@@ -273,24 +273,27 @@ button {
   isolation: isolate;
 }
 
-.depth-canvas,
-.depth-vignette,
-.depth-copy,
-.depth-fallback {
-  position: absolute;
-}
-
 .depth-canvas {
+  position: absolute;
   inset: 0;
   z-index: 1;
   width: 100%;
   height: 100%;
   opacity: 0;
-  transition: opacity 420ms ease;
 }
 
 .depth-intro.is-webgl-ready .depth-canvas {
   opacity: 1;
+}
+
+.depth-intro.is-webgl-ready .depth-fallback {
+  visibility: hidden;
+}
+
+.depth-vignette,
+.depth-copy,
+.depth-fallback {
+  position: absolute;
 }
 
 .depth-vignette {
@@ -298,20 +301,9 @@ button {
   inset: 0;
   pointer-events: none;
   background:
+    linear-gradient(90deg, rgba(0, 0, 0, 0.54), rgba(0, 0, 0, 0.14) 62%, transparent),
     radial-gradient(circle at 50% 48%, transparent 24rem, rgba(0, 0, 0, 0.66) 78%),
     linear-gradient(180deg, rgba(0, 0, 0, 0.38), transparent 28%, transparent 64%, rgba(0, 0, 0, 0.72));
-}
-
-.depth-vignette::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  opacity: 0.3;
-  mix-blend-mode: screen;
-  background-image:
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='150' height='150' viewBox='0 0 150 150'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.05' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='150' height='150' filter='url(%23n)' opacity='.72'/%3E%3C/svg%3E"),
-    repeating-linear-gradient(0deg, rgba(255,255,255,0.08) 0 1px, transparent 1px 3px);
-  background-size: 170px 170px, 100% 3px;
 }
 
 .depth-copy {
@@ -326,6 +318,7 @@ button {
 .depth-copy h1 {
   margin: 0 0 0.8rem;
   font-size: clamp(4rem, 8vw, 9.2rem);
+  text-shadow: 0 3px 14px rgba(0, 0, 0, 0.6);
 }
 
 .depth-copy p:not(.section-label) {
@@ -334,12 +327,20 @@ button {
   font-size: clamp(1rem, 1.45vw, 1.2rem);
 }
 
-.depth-copy span {
+.depth-enter {
+  position: absolute;
+  z-index: 3;
+  right: clamp(1.25rem, 7vw, 6rem);
+  bottom: clamp(2rem, 9vw, 7rem);
   color: var(--nuun-orange);
-  font-size: 0.74rem;
+  font-size: clamp(2.25rem, 3.4vw, 4.15rem);
   font-weight: 800;
   letter-spacing: 0.18em;
+  line-height: 0.9;
   text-transform: uppercase;
+  text-align: right;
+  opacity: clamp(0, calc(1 - (var(--depth-progress) * 2.6)), 1);
+  transform: translateY(calc(var(--depth-progress) * 42px));
 }
 
 .depth-fallback {
@@ -362,8 +363,31 @@ button {
   border: 1px solid rgba(229, 225, 214, 0.32);
 }
 
-.depth-intro.is-webgl-ready .depth-fallback {
+.depth-intro.is-animated .depth-fallback {
+  display: block;
+  padding: 0;
+  opacity: 1;
+  transform: none;
+}
+
+.depth-intro.is-animated .depth-fallback img {
+  position: absolute;
+  top: 46%;
+  left: 50%;
+  width: min(36vw, 620px);
+  height: auto;
+  max-height: 78svh;
+  min-height: 0;
+  object-fit: contain;
+  filter: none;
+  border: 0;
   opacity: 0;
+  transform: translate3d(-50%, -50%, 0);
+  box-shadow: 0 24px 75px rgba(0, 0, 0, 0.28);
+}
+
+.depth-intro.is-animated .depth-fallback img:first-child {
+  opacity: 1;
 }
 
 .depth-intro.is-static {
@@ -396,15 +420,12 @@ button {
 .hero-dots {
   position: absolute;
   z-index: 0;
-  inset: 0;
+  inset: -8%;
   pointer-events: none;
-}
-
-.hero-dots canvas {
-  display: block;
-  width: 100% !important;
-  height: 100% !important;
-  opacity: 0.76;
+  opacity: 0.75;
+  background-image: radial-gradient(circle, rgba(224, 117, 63, 0.72) 1.3px, transparent 2.2px);
+  background-size: 28px 28px;
+  mask-image: radial-gradient(ellipse at 54% 48%, #000 12%, transparent 75%);
 }
 
 .hero-inner {
@@ -440,6 +461,7 @@ h2 {
   font-weight: 400;
   letter-spacing: var(--display-tracking);
   text-transform: uppercase;
+  width: calc(100% / var(--display-width));
   transform: scaleX(var(--display-width));
   transform-origin: left center;
 }
@@ -468,6 +490,7 @@ h3 {
   letter-spacing: var(--display-tracking);
   line-height: 0.94;
   text-transform: uppercase;
+  width: calc(100% / var(--display-width));
   transform: scaleX(var(--display-width));
   transform-origin: left center;
 }
@@ -635,6 +658,8 @@ p {
 }
 
 .scripture-card h2 {
+  width: auto;
+  transform: none;
   max-width: 760px;
   margin: 0;
   font-family: Georgia, serif;
@@ -743,7 +768,7 @@ p {
 }
 
 .about-image > .gallery-trigger:first-child img {
-  object-position: 50% 58%;
+  object-position: 50% 0%;
 }
 
 .about-image > .gallery-trigger:first-child {
@@ -811,15 +836,14 @@ p {
   color: var(--nuun-orange);
 }
 
-.problem-layout {
-  display: grid;
-  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
-  gap: clamp(1.5rem, 5vw, 4rem);
-  align-items: stretch;
+.problem-copy {
+  max-width: 900px;
 }
 
-.problem-layout > :first-child {
-  align-self: center;
+.problem-copy p {
+  max-width: 760px;
+  font-size: clamp(1.05rem, 1.65vw, 1.35rem);
+  line-height: 1.55;
 }
 
 .problem-section {
@@ -935,27 +959,6 @@ p {
 .image-lightbox-close:hover {
   border-color: var(--nuun-orange);
   color: var(--nuun-orange);
-}
-
-.problem-list {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 0.85rem;
-}
-
-.problem-list article {
-  min-height: 180px;
-  border: 1px solid rgba(229, 225, 214, 0.18);
-  background: rgba(20, 19, 18, 0.82);
-  padding: 1rem;
-}
-
-.problem-list article:hover {
-  border-color: var(--nuun-orange);
-}
-
-.problem-list h3 {
-  margin-top: 1.4rem;
 }
 
 .event-model h2::after,
@@ -1074,6 +1077,7 @@ p {
   letter-spacing: 0.045em;
   line-height: 0.92;
   text-transform: uppercase;
+  width: calc(100% / var(--display-width));
   transform: scaleX(var(--display-width));
   transform-origin: left center;
 }
@@ -1092,13 +1096,21 @@ p {
 
 .writing-stack a {
   display: grid;
-  grid-template-rows: clamp(235px, 26vw, 320px) auto;
+  grid-template-rows: auto 1fr;
   min-height: 0;
 }
 
 .writing-stack a > img {
+  height: auto;
+  aspect-ratio: 1.1;
+  object-fit: contain;
   min-height: 0;
   max-height: none;
+  background: #e5e1d6;
+}
+
+.writing-stack a:hover img {
+  transform: none;
 }
 
 .writing-stack a > div,
@@ -1140,13 +1152,14 @@ p {
 .support {
   grid-template-columns: minmax(380px, 0.58fr) minmax(320px, 0.42fr);
   gap: clamp(2rem, 6vw, 5rem);
-  align-items: start;
+  align-items: stretch;
   border-top-color: rgba(224, 117, 63, 0.28);
 }
 
 .support-copy {
-  display: grid;
-  align-content: start;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
 .support-copy h2 {
@@ -1207,6 +1220,13 @@ p {
   width: min(100%, 440px);
 }
 
+/* The progress bar stays on the editorial side of the appeal, separate from checkout. */
+.support-copy > [data-entity="FUNDRAISING_BAR"] {
+  width: min(100%, 540px);
+  margin-top: auto;
+  padding-top: clamp(1.5rem, 3vw, 2.75rem);
+}
+
 .support-embed {
   display: grid;
   justify-items: center;
@@ -1232,11 +1252,6 @@ p {
 .embed-frame > [data-entity="EMBED_FORM"] > * {
   width: 100% !important;
   max-width: 100% !important;
-}
-
-.embed-frame > [data-entity="FUNDRAISING_BAR"] {
-  width: 100%;
-  margin-bottom: 0;
 }
 
 .embed-frame > [data-entity="EMBED_FORM"]:empty {
@@ -1312,14 +1327,9 @@ p {
   .hero-inner,
   .section,
   .support,
-  .problem-layout,
   .about-section,
   .problem-section {
     grid-template-columns: 1fr;
-  }
-
-  .problem-layout > :first-child {
-    align-self: start;
   }
 
   .about-section > .section-body,
@@ -1356,8 +1366,7 @@ p {
     min-height: 190px;
   }
 
-  .compact-grid,
-  .problem-list {
+  .compact-grid {
     grid-template-columns: 1fr 1fr;
   }
 
@@ -1401,6 +1410,13 @@ p {
     bottom: 5.5rem;
   }
 
+  .depth-enter {
+    right: 1rem;
+    bottom: 2rem;
+    max-width: calc(100% - 2rem);
+    font-size: clamp(1.8rem, 9vw, 3rem);
+  }
+
   .depth-copy h1 {
     font-size: clamp(3.4rem, 17vw, 5.7rem);
   }
@@ -1408,6 +1424,17 @@ p {
   .depth-fallback {
     grid-template-columns: 1fr;
     padding: 5.5rem 1rem 1rem;
+  }
+
+  .depth-intro.is-animated .depth-fallback img {
+    width: min(82vw, 440px);
+    max-height: 70svh;
+  }
+
+  .depth-vignette {
+    background:
+      linear-gradient(180deg, rgba(0, 0, 0, 0.08), rgba(0, 0, 0, 0.55) 58%, rgba(0, 0, 0, 0.74)),
+      radial-gradient(circle at 50% 48%, transparent 17rem, rgba(0, 0, 0, 0.45) 78%);
   }
 
   h1 {
@@ -1431,6 +1458,8 @@ p {
   }
 
   .scripture-card h2 {
+  width: auto;
+  transform: none;
     font-size: clamp(2rem, 10vw, 3.5rem);
     letter-spacing: 0.035em;
   }
@@ -1458,7 +1487,6 @@ p {
   }
 
   .compact-grid,
-  .problem-list,
   .writing-wall {
     grid-template-columns: 1fr;
   }
@@ -1509,16 +1537,11 @@ p {
     line-height: 1.02;
   }
 
-  .problem-list article {
-    min-height: 132px;
-  }
-
   .writing-stack a,
   .channel-grid a {
     grid-template-rows: auto auto;
   }
 
-  .writing-stack a > img,
   .channel-grid a > img {
     min-height: 132px;
     max-height: 170px;
