@@ -290,6 +290,21 @@ button {
   visibility: hidden;
 }
 
+/* Let the first photograph paint immediately while the 3D gallery loads. */
+.depth-intro.is-animated:not(.is-webgl-ready) .depth-fallback img:not(:first-child) {
+  display: none;
+}
+
+.depth-intro.is-animated:not(.is-webgl-ready) .depth-fallback img:first-child {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  min-height: 0;
+  filter: none;
+}
+
 .depth-vignette,
 .depth-copy,
 .depth-fallback {
