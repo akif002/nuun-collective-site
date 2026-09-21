@@ -24,7 +24,8 @@ body.edition::after { opacity: 0.055; background-image: url('/assets/noise.png')
   line-height: 1.02;
 }
 .edition .site-header {
-  height: 70px;
+  height: calc(70px + env(safe-area-inset-top, 0px));
+  padding-top: env(safe-area-inset-top, 0px);
   background: #101513;
   border-bottom-color: #ffffff20;
   backdrop-filter: none;
@@ -136,7 +137,7 @@ body.edition::after { opacity: 0.055; background-image: url('/assets/noise.png')
   .edition .support { grid-template-columns: 1fr; }
 }
 @media (max-width: 680px) {
-  .edition .site-header { height: 62px; }
+  .edition .site-header { height: calc(62px + env(safe-area-inset-top, 0px)); }
   .edition .depth-copy { left: 1.25rem; width: calc(100% - 2.5rem); bottom: 18%; }
   .edition .depth-copy h1 { font-size: clamp(4rem, 16vw, 6.5rem); }
   .edition .depth-enter { right: 1.25rem; bottom: 7%; font-size: 0.9rem; }
@@ -199,8 +200,9 @@ body.edition::after { opacity: 0.055; background-image: url('/assets/noise.png')
 /* A separate paper inset, restored from the original Mission treatment. */
 @media (max-width: 980px) {
   .edition .site-header {
-    height: 64px;
-    padding-inline: 20px;
+    height: calc(64px + env(safe-area-inset-top, 0px));
+    padding-left: max(20px, env(safe-area-inset-left, 0px));
+    padding-right: max(20px, env(safe-area-inset-right, 0px));
     grid-template-columns: minmax(0, 1fr) auto;
     gap: 16px;
   }
@@ -238,7 +240,6 @@ body.edition::after { opacity: 0.055; background-image: url('/assets/noise.png')
 .edition .scripture-card h2 span { color: #97502f; }
 .edition .scripture-card .section-label, .edition .scripture-card cite { color: #874728; }
 @media (max-width: 680px) {
-  .edition .site-header { padding-inline: 1.25rem; }
   .edition .button { padding: 0.7rem 1rem; min-height: 44px; }
   .edition .section-body > p, .edition .problem-copy p, .edition .support-copy > p { font-size: 1.05rem; line-height: 1.55; }
   .edition .hero-copy h2, .edition .problem-copy h2 { font-size: clamp(2rem, 9vw, 2.7rem); }
