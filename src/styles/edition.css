@@ -1,7 +1,7 @@
 /* Photographic chapters: dark opening, paper reading surfaces, Nuun orange. */
 body.edition {
   --paper: #e5e1d6;
-  --ink: #192321;
+  --ink: #000;
   --display: "Korolev", "Helvetica Neue", sans-serif;
   --display-width: 1;
   --display-tracking: -0.055em;
@@ -70,8 +70,8 @@ body.edition::after { opacity: 0.055; background-image: url('/assets/noise.png')
   grid-template-columns: minmax(0, 1fr);
   background: var(--paper);
   color: var(--ink);
-  --cream-soft: #42483f;
-  --cream-muted: #535c50;
+  --cream-soft: #000;
+  --cream-muted: #000;
 }
 .chapter-heading { position: relative; min-height: 540px; height: 72svh; max-height: 850px; overflow: hidden; isolation: isolate; grid-column: 1 / -1; }
 .chapter-heading > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: -2; }
@@ -197,6 +197,14 @@ body.edition::after { opacity: 0.055; background-image: url('/assets/noise.png')
 .edition .support-notes b { color: #d49a76; }
 
 /* A separate paper inset, restored from the original Mission treatment. */
+.edition .scripture-card h2, .edition .scripture-card blockquote { color: #000; }
+@media (prefers-reduced-motion: no-preference) and (hover: hover) {
+  .edition .button { transition: background-color 180ms ease, transform 180ms ease; }
+  .edition .button:hover { transform: translateY(-2px); }
+  .edition .button:active { transform: translateY(0); }
+  .edition .writing-stack a, .edition .channel-grid a { transition: transform 240ms cubic-bezier(0.22, 1, 0.36, 1); }
+  .edition .writing-stack a:hover, .edition .channel-grid a:hover { transform: translateY(-4px); }
+}
 .edition .scripture-section { width: 100%; padding: clamp(3rem, 7vw, 6rem) max(6vw, calc((100vw - 1160px) / 2)); background: #101513; border: 0; }
 .edition .scripture-card h2 { font-weight: 400; letter-spacing: -0.025em; line-height: 1.12; }
 .edition .scripture-card::before { background-image: url('/assets/noise.png'); background-size: 96px; }
