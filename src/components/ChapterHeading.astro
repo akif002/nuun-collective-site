@@ -1,0 +1,17 @@
+---
+interface Props {
+  id: string;
+  title: string;
+  image: string;
+  alt: string;
+  position?: string;
+}
+const { id, title, image, alt, position = "50% 50%" } = Astro.props;
+---
+<header class="chapter-heading">
+  <img src={image} alt={alt} loading="lazy" decoding="async" style={`object-position: ${position}`} />
+  <h2 id={id}>{title}</h2>
+  <svg class="paper-edge" viewBox="0 0 1440 35" preserveAspectRatio="none" aria-hidden="true">
+    <path d="M0 19 64 23 100 15 163 25 217 18 260 27 332 15 380 22 437 12 492 23 561 16 612 28 663 17 730 23 791 13 854 25 913 15 974 24 1031 14 1083 24 1150 18 1210 26 1276 14 1332 22 1390 16 1440 23V35H0Z" />
+  </svg>
+</header>

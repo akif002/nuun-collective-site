@@ -1,8 +1,9 @@
 ---
 import DepthIntro from "../components/DepthIntro.astro";
-import HeroDots from "../components/HeroDots.astro";
+import ChapterHeading from "../components/ChapterHeading.astro";
 import HeroPenLogo from "../components/HeroPenLogo";
 import "../styles/global.css";
+import "../styles/edition.css";
 ---
 
 <!doctype html>
@@ -16,7 +17,7 @@ import "../styles/global.css";
     />
     <title>Nuun Collective</title>
     <link rel="preload" href="/assets/gallery/nuun-gallery-05.webp" as="image" fetchpriority="high" />
-    <link rel="preload" href="/assets/fonts/rama-gothic-c-heavy.otf" as="font" type="font/otf" crossorigin />
+    <link rel="preload" href="/assets/fonts/korolev-medium.otf" as="font" type="font/otf" crossorigin />
     <!-- Start of CharityStack Embed -->
     <script
       type="text/javascript"
@@ -29,7 +30,7 @@ import "../styles/global.css";
     <!-- End of CharityStack Embed-->
     <script defer src="/script.js" is:inline></script>
   </head>
-  <body>
+  <body class="edition">
     <a class="skip-link" href="#main">Skip to content</a>
 
     <header class="site-header" data-header>
@@ -57,21 +58,24 @@ import "../styles/global.css";
 
     <main id="main">
       <DepthIntro />
+      <nav class="chapter-nav" aria-label="Explore Nuun">
+        <a href="#top" data-chapter="top">Nuun Collective</a>
+        <a href="#about" data-chapter="about">Learn, Discuss, Build</a>
+        <a href="#writing" data-chapter="writing">Read</a>
+        <a href="#media" data-chapter="media">Listen</a>
+        <a href="#support" data-chapter="support">Support</a>
+      </nav>
 
       <section class="hero" aria-labelledby="hero-title">
-        <HeroDots />
         <div class="hero-inner">
           <div class="hero-logo reveal">
             <HeroPenLogo className="hero-pen-logo" client:visible />
           </div>
 
           <div class="hero-copy reveal">
-            <h1 id="hero-title">
-              Bridging engagement with tangible outcomes to solve local challenges.
-            </h1>
+            <h2 id="hero-title">A community shaped<br />by its conversations.</h2>
             <p class="hero-subtext">
-              Nuun Collective brings Muslims into serious rooms for conversation, writing, media,
-              and action.
+              Talks, writing, and shared work.<br />Rooted in the Muslim community. Made in Dallas.
             </p>
             <div class="actions">
               <a class="button button-secondary" href="https://www.nuuncollective.com/" target="_blank" rel="noreferrer">
@@ -88,30 +92,18 @@ import "../styles/global.css";
         <div class="problem-copy reveal">
           <h2 id="problem-title">A place to think together.</h2>
           <p>
-            We need places where Muslims can ask difficult questions, disagree openly,
-            and work through the issues that affect our communities. Too often, those
-            conversations stay within familiar circles or end without a next step.
+            Muslim communities need space for difficult questions and honest disagreement.
+            Nuun offers a place to examine those questions together.
           </p>
           <p>
-            Nuun brings people together through talks, reading, and writing. We make time
-            to examine ideas, learn from one another, and decide what we can do together
-            here in Dallas.
+            Through talks, reading, and writing, we connect questions of faith and culture
+            to the responsibilities of community life in Dallas.
           </p>
-        </div>
-        <div class="problem-gallery reveal" aria-label="Nuun Collective community moments">
-          <button type="button" class="gallery-trigger" data-lightbox-src="/assets/gallery/Nuun5Suad-7.webp" data-lightbox-alt="Wide view of a Nuun community event with attendees and speakers">
-            <img src="/assets/gallery/Nuun5Suad-7.webp" alt="Wide view of a Nuun community event with attendees and speakers" loading="lazy" decoding="async" />
-          </button>
-          <button type="button" class="gallery-trigger" data-lightbox-src="/assets/gallery/nuun-community-paradigm-culture.webp" data-lightbox-alt="Nuun speaker conversation in front of a Paradigm of Culture projection">
-            <img src="/assets/gallery/nuun-community-paradigm-culture.webp" alt="Nuun speaker conversation in front of a Paradigm of Culture projection" loading="lazy" decoding="async" />
-          </button>
-          <button type="button" class="gallery-trigger" data-lightbox-src="/assets/gallery/IMG_9694.webp" data-lightbox-alt="Nuun community members speaking together at an event">
-            <img src="/assets/gallery/IMG_9694.webp" alt="Nuun community members speaking together at an event" loading="lazy" decoding="async" />
-          </button>
         </div>
       </section>
 
       <section class="section about-section" id="about" aria-labelledby="about-title">
+        <ChapterHeading id="about-title" title="Learn, Discuss, Build" image="/assets/gallery/Nuun5Suad-36.webp" alt="A woman speaking into a microphone during a Nuun discussion" position="50% 40%" />
         <figure class="about-image reveal">
           <button type="button" class="gallery-trigger" data-lightbox-src="/assets/media/nuun-event.jpg" data-lightbox-alt="Nuun speaker holding a microphone at a community gathering">
             <img src="/assets/media/nuun-event.jpg" alt="Nuun speaker holding a microphone at a community gathering" loading="lazy" decoding="async" />
@@ -119,16 +111,12 @@ import "../styles/global.css";
           <button type="button" class="gallery-trigger" data-lightbox-src="/assets/gallery/nuun-community-table.png" data-lightbox-alt="Three attendees smiling together at a Nuun gathering">
             <img src="/assets/gallery/nuun-community-table.png" alt="Three attendees smiling together at a Nuun gathering" loading="lazy" decoding="async" />
           </button>
-          <button type="button" class="gallery-trigger" data-lightbox-src="/assets/gallery/Nuun5Suad-39.webp" data-lightbox-alt="Wide view of a Nuun community event with attendees and speakers">
-            <img src="/assets/gallery/Nuun5Suad-39.webp" alt="Wide view of a Nuun community event with attendees and speakers" loading="lazy" decoding="async" />
-          </button>
         </figure>
         <div class="section-body reveal">
-          <h2 id="about-title">A community think tank.</h2>
+          <h3 class="editorial-heading">A community think tank.</h3>
           <p>
-            Nuun Collective builds a culture of thinkers who lead, builders who change, and
-            collaborators driven by purpose. Through talks, events, and writing sessions, we move
-            critical thought toward meaningful action.
+            Nuun is a community think tank in Dallas. Our talks and writing sessions
+            bring Muslims with different experiences into the same conversation.
           </p>
           <div class="compact-grid">
             <article>
@@ -137,11 +125,11 @@ import "../styles/global.css";
             </article>
             <article>
               <h3>Writing</h3>
-              <p>Essays, transcripts, reflections, and published thought.</p>
+              <p>Essays by community members and transcripts of our talks.</p>
             </article>
             <article>
               <h3>Media</h3>
-              <p>Videos, audio, and transcripts that keep the conversation moving.</p>
+              <p>Recordings for anyone who couldn’t be there.</p>
             </article>
           </div>
         </div>
@@ -164,11 +152,11 @@ import "../styles/global.css";
       </section>
 
       <section class="section writing-section" id="writing" aria-labelledby="writing-title">
+        <ChapterHeading id="writing-title" title="Read." image="/assets/gallery/Nuun5Suad-16.webp" alt="Community members reading together at a Nuun gathering" position="50% 50%" />
         <div class="section-body reveal">
-          <h2 id="writing-title">Writing that leaves the room.</h2>
+          <h3 class="editorial-heading">Essays and conversations.</h3>
           <p>
-            Essays, transcripts, and reflections are where the room becomes public record.
-            Start with the archive, then follow the conversations as they publish.
+            Read essays by community members and transcripts of our talks.
           </p>
           <div class="writing-wall">
             <div class="writing-stack">
@@ -242,11 +230,11 @@ import "../styles/global.css";
       </section>
 
       <section class="section media-section" id="media" aria-labelledby="media-title">
+        <ChapterHeading id="media-title" title="Listen." image="/assets/gallery/R61_8181-Enhanced-NR.webp" alt="A view from the panel into the audience at a Nuun conversation" position="50% 50%" />
         <div class="section-body reveal">
-          <h2 id="media-title">Watch, listen, follow.</h2>
+          <h3 class="editorial-heading">Watch or listen.</h3>
           <p>
-            Nuun lives across video, audio, and social clips for people who want the conversation
-            before, during, and after the room.
+            Full talks on YouTube and Spotify. Upcoming gatherings on Instagram.
           </p>
           <div class="channel-grid">
             <a href="https://www.youtube.com/channel/UCuCJGcOulNp7St2E5THLN4Q" target="_blank" rel="noreferrer">
@@ -279,31 +267,31 @@ import "../styles/global.css";
 
       <section class="support" id="support" aria-labelledby="support-title">
         <div class="support-copy reveal">
-          <h2 id="support-title">Become a supporter.</h2>
+          <h2 id="support-title">Help fund the next<br />Nuun gathering.</h2>
           <p>
-            Nuun is completely bootstrapped. Everything so far has been funded by selling
-            notebooks, merch, and putting in our own personal money.
+            Nuun runs on community support, notebook and merch sales, and the team’s own money.
+            Donations pay for gatherings, recordings, and publishing.
           </p>
           <ul class="support-notes" aria-label="Why support Nuun">
             <li>
               <b>$0</b>
               <span>
-                <strong>Institutional funding</strong>
-                Fully bootstrapped by the team and community support.
+                <strong>Built without institutional funding</strong>
+                The team and community have funded Nuun from the start.
               </span>
             </li>
             <li>
-              <b>Every dollar</b>
+              <b>Your gift</b>
               <span>
-                <strong>Covers the work</strong>
-                Events, media, publishing, and future programming.
+                <strong>Funds events and publishing</strong>
+                Help us host gatherings and make the talks and writing available.
               </span>
             </li>
             <li>
               <b>10+ events</b>
               <span>
-                <strong>Real turnout</strong>
-                Around 150 people on average; our biggest events have reached 500 attendees.
+                <strong>People are showing up</strong>
+                About 150 attendees on average; up to 500 at our largest events.
               </span>
             </li>
           </ul>
@@ -318,16 +306,6 @@ import "../styles/global.css";
         </div>
       </section>
 
-      <section class="manifesto-section" id="manifesto" aria-labelledby="manifesto-title">
-        <div class="manifesto-inner reveal">
-          <h2 id="manifesto-title" class="manifesto-lines">
-            We believe <span>writing</span> is not passive.<br />
-            We believe conversation should move people.<br />
-            We believe thought becomes <span>culture</span>, and culture becomes
-            <span>action</span>.
-          </h2>
-        </div>
-      </section>
     </main>
 
     <dialog class="image-lightbox" data-image-lightbox aria-label="Expanded gallery image">
@@ -349,5 +327,8 @@ import "../styles/global.css";
       <p>Nuun Collective / Dallas / Thinking / Writing / Action</p>
       <p>© 2026 Nuun Collective. All rights reserved.</p>
     </footer>
+    <script>
+      import "../scripts/chapter-nav.js";
+    </script>
   </body>
 </html>
