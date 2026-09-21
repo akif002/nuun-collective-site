@@ -16,14 +16,14 @@ function makePlaneGeometry(texture, viewport) {
   const image = texture.image;
   const ratio = image && image.width && image.height ? image.width / image.height : 1;
   const base = viewport.width < 680 ? 3.2 : 4.15;
-  const height = base / Math.max(ratio, 0.8);
+  const height = base / ratio;
   return new THREE.PlaneGeometry(base, height);
 }
 
 function textureFromImage(loader, image) {
   return new Promise((resolve, reject) => {
     loader.load(
-      image.dataset.src || image.currentSrc || image.src,
+      window.innerWidth < 680 ? image.dataset.mobileSrc : (image.dataset.src || image.currentSrc || image.src),
       (texture) => {
         texture.colorSpace = THREE.SRGBColorSpace;
         texture.anisotropy = 2;
@@ -47,7 +47,9 @@ export default function initDepthGallery() {
     const fallback = section.querySelector("[data-depth-fallback]");
     const images = Array.from(fallback?.querySelectorAll("img") || []);
     const showStatic = () => {
-      images.forEach((image) => { if (image.dataset.src) image.src = image.dataset.src; });
+      images.forEach((image) => {
+        image.src = window.innerWidth < 680 ? image.dataset.mobileSrc : image.dataset.src;
+      });
       section.classList.remove("is-animated", "is-webgl-ready");
       section.classList.add("is-static");
     };
@@ -66,7 +68,7 @@ export default function initDepthGallery() {
       THREE = await import("three");
       renderer = new THREE.WebGLRenderer({
       canvas,
-      antialias: true,
+      antialias: window.innerWidth >= 680,
       alpha: true,
       powerPreference: "high-performance",
     });
@@ -74,7 +76,7 @@ export default function initDepthGallery() {
       showStatic();
       return;
     }
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.25));
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, window.innerWidth < 680 ? 1 : 1.25));
 
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(42, 1, 0.1, 80);
@@ -106,7 +108,7 @@ export default function initDepthGallery() {
 
     function resize() {
       state.viewport.width = window.innerWidth;
-      state.viewport.height = window.innerHeight;
+      state.viewport.height = section.querySelector('.depth-stage').clientHeight;
       camera.aspect = state.viewport.width / state.viewport.height;
       camera.updateProjectionMatrix();
       renderer.setSize(state.viewport.width, state.viewport.height, false);
@@ -114,7 +116,7 @@ export default function initDepthGallery() {
 
     function updateProgress() {
       const rect = section.getBoundingClientRect();
-      const scrollable = Math.max(section.offsetHeight - window.innerHeight, 1);
+      const scrollable = Math.max(section.offsetHeight - state.viewport.height, 1);
       state.progress = clamp(-rect.top / scrollable);
     }
 
@@ -132,7 +134,7 @@ export default function initDepthGallery() {
       const velocity = state.eased - state.previous;
       state.previous = state.eased;
 
-      const finalDepth = Math.max((state.planes.length - 1) * 2.65, 1);
+      const finalDepth = Math.max((images.length - 1) * 2.65, 1);
       camera.position.z = 5.5 - state.eased * (finalDepth + 6.2);
       camera.position.x = Math.sin(state.eased * Math.PI * 1.7) * 0.38 + velocity * 18;
       camera.position.y = Math.cos(state.eased * Math.PI * 1.15) * 0.12 - state.eased * 0.16;
@@ -141,10 +143,11 @@ export default function initDepthGallery() {
       group.rotation.z = velocity * 2.8;
       group.rotation.y = velocity * 3.6;
 
-      state.planes.forEach((plane, index) => {
+      state.planes.forEach((plane) => {
         const distance = Math.abs(plane.position.z - (camera.position.z - 4.35));
         const focus = clamp(1 - distance / 5.5);
-        const drift = Math.sin(state.eased * Math.PI * 2 + index) * 0.05;
+        plane.visible = distance < 12;
+        const drift = Math.sin(state.eased * Math.PI * 2 + plane.userData.photoIndex) * 0.05;
 
         plane.material.opacity = lerp(0.16, 1, focus);
         plane.position.x = plane.userData.baseX + velocity * plane.userData.velocityPush + drift;
@@ -159,9 +162,8 @@ export default function initDepthGallery() {
 
     async function boot() {
       resize();
-      const textures = await Promise.all(images.map((image) => textureFromImage(loader, image)));
-
-      textures.forEach((texture, index) => {
+      async function addPhoto(image, index) {
+        const texture = await textureFromImage(loader, image);
         const geometry = makePlaneGeometry(texture, state.viewport);
         const material = new THREE.MeshBasicMaterial({
           map: texture,
@@ -176,20 +178,35 @@ export default function initDepthGallery() {
         mesh.position.set(mobile ? pattern[0] * 0.45 : pattern[0], mobile ? pattern[1] * 0.72 : pattern[1], -index * 2.65);
         mesh.rotation.z = mobile ? pattern[2] * 0.5 : pattern[2];
         mesh.userData.baseX = mesh.position.x;
+        mesh.userData.photoIndex = index;
         mesh.userData.baseY = mesh.position.y;
         mesh.userData.baseRotation = mesh.rotation.z;
         mesh.userData.velocityPush = mobile ? 5 : 12;
 
         group.add(mesh);
         state.planes.push(mesh);
-      });
+      }
+
+      await Promise.all(images.slice(0, 3).map(addPhoto));
 
       section.classList.add("is-webgl-ready");
       state.ready = true;
       scheduleRender();
+      // Decode remaining photos progressively instead of blocking the opening frame.
+      for (let index = 3; index < images.length && !state.disposed; index++) {
+        await new Promise((resolve) => setTimeout(resolve, 80));
+        try {
+          await addPhoto(images[index], index);
+          scheduleRender();
+        } catch { /* Keep the gallery usable if an individual photo fails. */ }
+      }
     }
 
-    const onResize = () => { resize(); scheduleRender(); };
+    const onResize = () => {
+      // Mobile Safari emits resize events as its address bar expands and collapses.
+      if (window.innerWidth < 680 && state.viewport.width === window.innerWidth) return;
+      resize(); scheduleRender();
+    };
     window.addEventListener("resize", onResize, { passive: true });
 
     window.addEventListener("scroll", scheduleRender, { passive: true });

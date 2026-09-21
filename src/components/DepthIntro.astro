@@ -102,7 +102,7 @@ const galleryImages = [
     <div class="depth-fallback" data-depth-fallback>
       {
         galleryImages.map((image, index) => (
-          <img src={index === 0 ? image.src : undefined} data-src={index === 0 ? undefined : image.src} alt={image.alt} width={image.width} height={image.height} loading={index === 0 ? "eager" : "lazy"} decoding={index === 0 ? "sync" : "async"} fetchpriority={index === 0 ? "high" : "auto"} />
+          <img src={index === 0 ? image.src.replace('/gallery/', '/gallery/mobile/') : undefined} data-mobile-src={image.src.replace('/gallery/', '/gallery/mobile/')} data-src={image.src} alt={image.alt} width={image.width} height={image.height} loading={index === 0 ? "eager" : "lazy"} decoding="async" fetchpriority={index === 0 ? "high" : "auto"} />
         ))
       }
     </div>
