@@ -1,4 +1,5 @@
 /* Photographic chapters: dark opening, paper reading surfaces, Nuun orange. */
+html { background-color: #101513; }
 body.edition {
   --paper: #e5e1d6;
   --ink: #000;
@@ -24,6 +25,9 @@ body.edition::after { opacity: 0.055; background-image: url('/assets/noise.png')
   line-height: 1.02;
 }
 .edition .site-header {
+  /* Keep the opaque header above the grain layer so Safari can sample it
+     when extending its color behind the iOS status bar. */
+  z-index: 90;
   height: calc(70px + env(safe-area-inset-top, 0px));
   padding-top: env(safe-area-inset-top, 0px);
   background: #101513;
