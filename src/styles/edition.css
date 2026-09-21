@@ -197,6 +197,33 @@ body.edition::after { opacity: 0.055; background-image: url('/assets/noise.png')
 .edition .support-notes b { color: #d49a76; }
 
 /* A separate paper inset, restored from the original Mission treatment. */
+@media (max-width: 980px) {
+  .edition .site-header {
+    height: 64px;
+    padding-inline: 20px;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 16px;
+  }
+  .edition .site-header .brand-logo { width: 88px; min-height: 44px; }
+  .edition .header-actions { gap: 14px; }
+  .edition .site-header .button {
+    min-height: 44px;
+    padding: 10px 16px;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0;
+    line-height: 1;
+    border-radius: 3px;
+  }
+  .edition .site-header .header-follow {
+    order: -1;
+    padding-inline: 4px;
+    background: transparent;
+    border-color: transparent;
+    color: #e5e1d6;
+    box-shadow: none;
+  }
+}
 .edition .scripture-card h2, .edition .scripture-card blockquote { color: #000; }
 @media (prefers-reduced-motion: no-preference) and (hover: hover) {
   .edition .button { transition: background-color 180ms ease, transform 180ms ease; }
