@@ -7,6 +7,7 @@ export type AnimatedLogoProps = {
   className?: string;
   onComplete?: () => void;
   variant?: LogoAnimationVariant;
+  scrollProgress?: number;
 };
 
 export type LogoAnimationVariant = "liquid" | "editorial" | "ink" | "pen" | "typesetter" | "exposure";
@@ -70,6 +71,7 @@ export default function AnimatedLogo({
   className,
   onComplete,
   variant = "liquid",
+  scrollProgress,
 }: AnimatedLogoProps) {
   const speedMultiplier = useContext(LogoAnimationSpeedContext);
   const reducedMotion = useReducedMotion();
@@ -83,6 +85,7 @@ export default function AnimatedLogo({
   const isAnimated = run > 0 && !reducedMotion;
   const isWaiting = run === 0 && !reducedMotion;
   const isComplete = Boolean(reducedMotion);
+  const isScrollPen = variant === "pen" && scrollProgress !== undefined && !reducedMotion;
   const settleDelay = logoAnimationConfig.variantSettleDelays[variant] * speedMultiplier;
   const letterCenters = [64, 177, 292, 408];
 
@@ -214,7 +217,24 @@ export default function AnimatedLogo({
         {/* Flat-cut centerline strokes leave the final reference-matched logo behind like a pen pass. */}
         {variant === "pen" && (
           <>
-            {logoPaths.map((d, index) => (
+            {isScrollPen ? logoPaths.map((d, index) => {
+              const letterProgress = Math.min(1, Math.max(0, (scrollProgress - index * 0.15) / 0.55));
+              return (
+                <path
+                  d={d}
+                  key={d}
+                  pathLength={1}
+                  fill="none"
+                  stroke={logoAnimationConfig.color}
+                  strokeLinecap="butt"
+                  strokeLinejoin="miter"
+                  strokeWidth="10"
+                  strokeDasharray="1"
+                  strokeDashoffset={1 - letterProgress}
+                  opacity={letterProgress > 0 ? 1 : 0}
+                />
+              );
+            }) : logoPaths.map((d, index) => (
               <motion.path
                 d={d}
                 key={d}

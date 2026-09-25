@@ -10,7 +10,7 @@ import "../styles/edition.css";
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta id="site-viewport" name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <meta name="theme-color" content="#101513" />
     <meta
       name="description"
@@ -20,6 +20,7 @@ import "../styles/edition.css";
     <link rel="preload" href="/assets/gallery/mobile/nuun-gallery-05.webp" as="image" fetchpriority="high" />
     <link rel="preload" href="/assets/fonts/korolev-medium.otf" as="font" type="font/otf" crossorigin />
     <!-- Start of CharityStack Embed -->
+    <script defer src="/loading.js" is:inline></script>
     <script
       type="text/javascript"
       defer
@@ -32,9 +33,10 @@ import "../styles/edition.css";
     <script defer src="/script.js" is:inline></script>
   </head>
   <body class="edition">
+    <a class="skip-link" href="#main">Skip to content</a>
     <header class="site-header" data-header>
       <a class="brand-logo small" href="#top" aria-label="Nuun Collective home">
-        <img src="/assets/logos/nuun-wordmark-orange.png" alt="Nuun" />
+        <img src="/assets/logos/nuun-wordmark-orange.png" alt="Nuun" width="470" height="140" />
       </a>
       <nav class="desktop-nav" aria-label="Primary navigation">
         <a href="#about">About</a>
@@ -74,7 +76,7 @@ import "../styles/edition.css";
           <div class="hero-copy reveal">
             <h2 id="hero-title">A community shaped<br />by its conversations.</h2>
             <div class="actions">
-              <a class="button button-secondary" href="https://www.nuuncollective.com/" target="_blank" rel="noreferrer">
+              <a class="button button-secondary" href="#writing">
                 Read Nuun
               </a>
               <button class="button button-donate" type="button" data-donate>Donate</button>
@@ -102,10 +104,10 @@ import "../styles/edition.css";
         <ChapterHeading id="about-title" title="Learn, Discuss, Build" image="/assets/gallery/Nuun5Suad-36.webp" alt="A woman speaking into a microphone during a Nuun discussion" position="50% 40%" />
         <figure class="about-image reveal">
           <button type="button" class="gallery-trigger" data-lightbox-src="/assets/media/nuun-event.jpg" data-lightbox-alt="Nuun speaker holding a microphone at a community gathering">
-            <img src="/assets/media/nuun-event.jpg" alt="Nuun speaker holding a microphone at a community gathering" loading="lazy" decoding="async" />
+            <img src="/assets/media/nuun-event.jpg" alt="Nuun speaker holding a microphone at a community gathering" width="1200" height="600" loading="lazy" decoding="async" />
           </button>
           <button type="button" class="gallery-trigger" data-lightbox-src="/assets/gallery/nuun-community-table.png" data-lightbox-alt="Three attendees smiling together at a Nuun gathering">
-            <img src="/assets/gallery/nuun-community-table.png" alt="Three attendees smiling together at a Nuun gathering" loading="lazy" decoding="async" />
+            <img src="/assets/gallery/nuun-community-table.png" alt="Three attendees smiling together at a Nuun gathering" width="1024" height="683" loading="lazy" decoding="async" />
           </button>
         </figure>
         <div class="section-body reveal">
@@ -164,6 +166,8 @@ import "../styles/edition.css";
                 <img
                   src="/assets/screenshots/oak-cliff-two-cities.webp"
                   alt="Screenshot of the Nuun x Oak Cliff: Tale of Two Cities article"
+                  width="985"
+                  height="797"
                   loading="lazy"
                   decoding="async"
                 />
@@ -180,6 +184,8 @@ import "../styles/edition.css";
                 <img
                   src="/assets/screenshots/incoherence.webp"
                   alt="Screenshot of the Incoherence article"
+                  width="881"
+                  height="791"
                   loading="lazy"
                   decoding="async"
                 />
@@ -196,6 +202,8 @@ import "../styles/edition.css";
                 <img
                   src="/assets/screenshots/suhaib-webb.webp"
                   alt="Screenshot of the NUUN x Sheikh Suhaib Webb transcript"
+                  width="949"
+                  height="731"
                   loading="lazy"
                   decoding="async"
                 />
@@ -212,6 +220,8 @@ import "../styles/edition.css";
                 <img
                   src="/assets/screenshots/yasir-mahdi.webp"
                   alt="Screenshot of the Nuun x Dr. Yasir Qadhi x Sheikh Mahdi article"
+                  width="1280"
+                  height="820"
                   loading="lazy"
                   decoding="async"
                 />
@@ -232,16 +242,16 @@ import "../styles/edition.css";
             Full talks on YouTube and Spotify. Upcoming gatherings on Instagram.
           </p>
           <div class="channel-grid">
-            <a href="https://www.youtube.com/channel/UCuCJGcOulNp7St2E5THLN4Q" target="_blank" rel="noreferrer">
-              <img src="/assets/screenshots/listen-youtube.webp" alt="Nuun Collective YouTube channel" loading="lazy" decoding="async" />
+            <a href="https://www.youtube.com/@nuuncollective" target="_blank" rel="noreferrer">
+              <img src="/assets/screenshots/listen-youtube.webp" alt="Nuun Collective YouTube channel" width="1530" height="2078" loading="lazy" decoding="async" />
               <div>
                 <small>Video</small>
                 <strong>YouTube</strong>
                 <span>Watch conversations</span>
               </div>
             </a>
-            <a href="https://www.instagram.com/nuun.collective/?hl=en" target="_blank" rel="noreferrer">
-              <img src="/assets/screenshots/listen-instagram.webp" alt="Nuun Collective Instagram profile" loading="lazy" decoding="async" />
+            <a href="https://www.instagram.com/nuun.collective/" target="_blank" rel="noreferrer">
+              <img src="/assets/screenshots/listen-instagram.webp" alt="Nuun Collective Instagram profile" width="1582" height="1346" loading="lazy" decoding="async" />
               <div>
                 <small>Live Updates</small>
                 <strong>Instagram</strong>
@@ -249,7 +259,7 @@ import "../styles/edition.css";
               </div>
             </a>
             <a href="https://open.spotify.com/show/7iV1qQqXSdfRFLcmznOgUM" target="_blank" rel="noreferrer">
-              <img src="/assets/screenshots/listen-spotify.webp" alt="Nuun Collective podcast on Spotify" loading="lazy" decoding="async" />
+              <img src="/assets/screenshots/listen-spotify.webp" alt="Nuun Collective podcast on Spotify" width="1044" height="1596" loading="lazy" decoding="async" />
               <div>
                 <small>Audio</small>
                 <strong>Spotify</strong>
@@ -286,17 +296,17 @@ import "../styles/edition.css";
 
     <dialog class="image-lightbox" data-image-lightbox aria-label="Expanded gallery image">
       <button class="image-lightbox-close" type="button" data-lightbox-close aria-label="Close image viewer">×</button>
-      <img data-lightbox-image alt="" />
+      <img data-lightbox-image src="/assets/media/nuun-event.jpg" alt="Nuun speaker holding a microphone at a community gathering" width="1200" height="600" />
     </dialog>
 
     <footer class="site-footer">
       <a class="brand-logo small" href="#top" aria-label="Nuun Collective home">
-        <img src="/assets/logos/nuun-wordmark-orange.png" alt="Nuun" />
+        <img src="/assets/logos/nuun-wordmark-orange.png" alt="Nuun" width="470" height="140" />
       </a>
       <nav aria-label="Footer navigation">
         <a href="https://www.instagram.com/nuun.collective/" target="_blank" rel="noreferrer">Instagram</a>
-        <a href="https://www.nuuncollective.com/" target="_blank" rel="noreferrer">Substack</a>
-        <a href="https://www.youtube.com/channel/UCuCJGcOulNp7St2E5THLN4Q" target="_blank" rel="noreferrer">YouTube</a>
+        <a href="https://substack.com/@nuun" target="_blank" rel="noreferrer">Substack</a>
+        <a href="https://www.youtube.com/@nuuncollective" target="_blank" rel="noreferrer">YouTube</a>
         <a href="https://open.spotify.com/show/7iV1qQqXSdfRFLcmznOgUM" target="_blank" rel="noreferrer">Spotify</a>
         <button type="button" data-donate>Donate</button>
       </nav>

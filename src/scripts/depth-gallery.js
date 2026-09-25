@@ -12,10 +12,17 @@ function getWebGLSupport() {
   }
 }
 
-function makePlaneGeometry(texture, viewport) {
+function makePlaneGeometry(texture, viewport, index) {
   const image = texture.image;
   const ratio = image && image.width && image.height ? image.width / image.height : 1;
-  const base = viewport.width < 680 ? 3.2 : 4.15;
+  // At the gallery's focal depth, keep the complete photograph in frame.
+  // Oversized portrait planes were clipped at the top and bottom on phones.
+  const visibleHeight = 2 * 4.35 * Math.tan((42 * Math.PI) / 360);
+  const visibleWidth = visibleHeight * viewport.width / viewport.height;
+  // Keep the opening image immersive; size the photos encountered while
+  // scrolling so their full height stays visible at the focal plane.
+  const maxWidth = viewport.width < 680 ? visibleWidth * 0.9 : 4.15;
+  const base = index === 0 ? (viewport.width < 680 ? 3.2 : 4.15) : Math.min(maxWidth, visibleHeight * 0.84 * ratio);
   const height = base / ratio;
   return new THREE.PlaneGeometry(base, height);
 }
@@ -93,6 +100,7 @@ export default function initDepthGallery() {
       disposed: false,
       inViewport: false,
       ready: false,
+      fadeUntil: 0,
       planes: [],
       patterns: [
         [-1.9, 0.65, -0.07],
@@ -144,12 +152,18 @@ export default function initDepthGallery() {
       group.rotation.y = velocity * 3.6;
 
       state.planes.forEach((plane) => {
-        const distance = Math.abs(plane.position.z - (camera.position.z - 4.35));
+        const cameraDistance = camera.position.z - plane.position.z;
+        const distance = Math.abs(cameraDistance - 4.35);
         const focus = clamp(1 - distance / 5.5);
-        plane.visible = distance < 12;
+        plane.visible = distance < 12 && cameraDistance > 0.35;
         const drift = Math.sin(state.eased * Math.PI * 2 + plane.userData.photoIndex) * 0.05;
 
-        plane.material.opacity = lerp(0.16, 1, focus);
+        // Keep each photo's projected size stable as the camera passes it.
+        // Scaling by the actual camera distance prevents a close plane from
+        // filling the screen and cutting off the image's top and bottom.
+        const approach = Math.min(1, Math.max(cameraDistance, 0) / 4.35);
+        plane.scale.setScalar(approach);
+        plane.material.opacity = lerp(0.16, 1, focus) * clamp((cameraDistance - 0.35) / 1.25) * clamp((performance.now() - plane.userData.loadedAt) / 350);
         plane.position.x = plane.userData.baseX + velocity * plane.userData.velocityPush + drift;
         plane.position.y = plane.userData.baseY - state.eased * 0.3 + drift * 0.35;
         plane.rotation.z = plane.userData.baseRotation + velocity * 4;
@@ -157,14 +171,18 @@ export default function initDepthGallery() {
 
       section.style.setProperty("--depth-progress", state.eased.toFixed(3));
       renderer.render(scene, camera);
-      if (Math.abs(state.progress - state.eased) > 0.0005 || Math.abs(velocity) > 0.00005) scheduleRender();
+      // Reveal only after a populated frame has been submitted, never a blank canvas.
+      section.classList.add("is-webgl-ready");
+      if (performance.now() < state.fadeUntil || Math.abs(state.progress - state.eased) > 0.0005 || Math.abs(velocity) > 0.00005) scheduleRender();
     }
 
     async function boot() {
       resize();
       async function addPhoto(image, index) {
         const texture = await textureFromImage(loader, image);
-        const geometry = makePlaneGeometry(texture, state.viewport);
+        if (state.disposed) { texture.dispose(); return; }
+        renderer.initTexture(texture);
+        const geometry = makePlaneGeometry(texture, state.viewport, index);
         const material = new THREE.MeshBasicMaterial({
           map: texture,
           transparent: true,
@@ -175,13 +193,21 @@ export default function initDepthGallery() {
         const pattern = state.patterns[index % state.patterns.length];
         const mobile = state.viewport.width < 680;
 
-        mesh.position.set(mobile ? pattern[0] * 0.45 : pattern[0], mobile ? pattern[1] * 0.72 : pattern[1], -index * 2.65);
+        // Keep mobile cards inside the narrow viewport instead of leaving
+        // most of each image off-screen during the scroll sequence.
+        mesh.position.set(
+          mobile ? pattern[0] * (index === 0 ? 0.45 : 0.015) : pattern[0],
+          mobile ? pattern[1] * (index === 0 ? 0.72 : 0.3) : pattern[1],
+          -index * 2.65,
+        );
         mesh.rotation.z = mobile ? pattern[2] * 0.5 : pattern[2];
         mesh.userData.baseX = mesh.position.x;
         mesh.userData.photoIndex = index;
         mesh.userData.baseY = mesh.position.y;
         mesh.userData.baseRotation = mesh.rotation.z;
-        mesh.userData.velocityPush = mobile ? 5 : 12;
+        mesh.userData.velocityPush = mobile ? (index === 0 ? 5 : 1.5) : 12;
+        mesh.userData.loadedAt = state.ready ? performance.now() : -350;
+        state.fadeUntil = performance.now() + 350;
 
         group.add(mesh);
         state.planes.push(mesh);
@@ -189,7 +215,6 @@ export default function initDepthGallery() {
 
       await Promise.all(images.slice(0, 3).map(addPhoto));
 
-      section.classList.add("is-webgl-ready");
       state.ready = true;
       scheduleRender();
       // Decode remaining photos progressively instead of blocking the opening frame.

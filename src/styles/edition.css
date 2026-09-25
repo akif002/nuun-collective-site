@@ -15,6 +15,15 @@ body.edition::before {
   mix-blend-mode: screen;
 }
 body.edition::after { opacity: 0.055; background-image: url('/assets/noise.png'); background-size: 96px; }
+@media (max-width: 980px) {
+  /* A viewport-fixed glow gets stranded against Safari's retracting toolbar. */
+  body.edition::before { display: none; }
+}
+main img { transition: opacity 350ms ease; }
+main img.image-pending { opacity: 0; }
+@media (prefers-reduced-motion: reduce) {
+  main img { transition: none; }
+}
 .edition h1, .edition h2, .edition h3,
 .edition .writing-stack strong, .edition .channel-grid strong {
   width: auto;
@@ -257,4 +266,10 @@ body.edition::after { opacity: 0.055; background-image: url('/assets/noise.png')
   .edition .scripture-card h2 { font-size: clamp(1.9rem, 7.5vw, 2.6rem); }
   .edition .scripture-card blockquote { font-size: 1rem; line-height: 1.6; }
   .edition .manifesto-lines { font-size: 1.9rem; }
+}
+
+@media (max-width: 980px) {
+  .edition .hero, .edition .problem-section, .edition .media-section {
+    background-image: radial-gradient(ellipse at 0% 100%, #e0753f26, transparent 55%);
+  }
 }
