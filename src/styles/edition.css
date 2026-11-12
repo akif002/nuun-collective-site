@@ -107,7 +107,7 @@ main img.image-pending { opacity: 0; }
 .edition .writing-wall { gap: 3.5rem 2rem; margin-top: 3rem; }
 .edition .writing-stack a { border: 0; background: none; overflow: visible; }
 .edition .writing-stack a::after, .edition .channel-grid a::after { display: none; }
-.edition .writing-stack a > img { object-fit: contain; aspect-ratio: 1.1; background: #d5d1c6; border-radius: 3px; filter: none; }
+.edition .writing-stack a > img { object-fit: cover; aspect-ratio: 16 / 9; background: #d5d1c6; border-radius: 3px; filter: none; }
 .edition .writing-stack a > div { padding: 1.25rem 0 0; gap: 0.65rem; }
 .edition .writing-stack small { color: #74513b; font-weight: 500; text-transform: none; letter-spacing: 0; font-size: 0.9rem; }
 .edition .writing-stack strong { color: var(--ink); font-size: clamp(1.5rem, 2.6vw, 2.4rem); line-height: 1.12; }
